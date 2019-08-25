@@ -15,6 +15,7 @@
             $msg="";
             $userid="";
             $flag=false;
+            $errors=[];
             $sql_login="select user_id from hr_users where login_name='".$username."' and password='".$password."'";
 
             if($res = $DB->fetch_one_array($sql_login)){
@@ -23,10 +24,14 @@
                 $flag = true;
             }else{
                 $msg  = "帳號或密碼錯誤!";
+                $errors[0]=array('id'=>'username', 'msg'=>'用户不存在');
+                $errors[1]=array('id'=>'password', 'msg'=>'密码不正确');
                 $flag = false;
             }
            
-            $data = array('userid' => $userid, 'msg' => $msg, 'success' => true, 'flag' => $flag);
+            $data = array('userid' => $userid, 'msg' => $msg
+                , 'success' => $flag, 'flag' => $flag
+                , 'errors' => $errors);
             $json = json_encode($data);
             header("Content-type:application/json; charset=UTF-8");
             echo $json;

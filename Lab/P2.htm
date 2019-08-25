@@ -7,6 +7,7 @@
     <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="/Ext/ext-all.js"></script>
     <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
    <style type="text/css">
         .loginpanel{
             position: "absolute"; 
@@ -25,8 +26,6 @@
             Ext.QuickTips.init();
             Ext.lib.Ajax.defaultPostHeader += '; charset=utf-8';
             Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
-            
-
 
             var loginPanel = new Ext.Panel({
                 //renderTo: 'loginPanel',
@@ -60,16 +59,26 @@
                         items:[
                             {
                                 xtype: 'form',
+                                url: '/Server/User.php?method=login',
+                                id: 'loginForm',
                                 defaultType: 'textfield',
                                 labelAlign: 'right',
                                 labelWidth: 60,
+                                width: 300,
                                 border: false,
-                                region: 'center',
-                                defaults: {border: false},
+                                region: 'left',
+                                defaults: {
+                                    border: false,
+                                    allowBlank: false,
+                                    blankText: '该字段不允许为空',
+                                    msgTarget: 'side'
+                                },
                                 style: 'background: #ffffff; padding:0px 35px 30px 16px;',
                                 items: [
-                                    {fieldLabel: '登录账号', name: 'user'},
-                                    {fieldLabel: '登录密码', name: 'pass', inputType: 'password'},
+                                    {fieldLabel: '登录账号', name: 'username',
+                                        regex: /^[a-zA-Z]{2,6}$/, regexText: '只能为2到6位的大小写字母'},
+                                    {fieldLabel: '登录密码', name: 'password', inputType: 'password',
+                                        regex: /^.{4,}$/, regexText: '长度不能少于4位'},
                                     {
                                         xtype: 'panel',
                                         layout: 'column',
@@ -97,7 +106,40 @@
                                 border: false,
                                 style: 'background: #23456; padding:35px 35px 50px 50px;',
                                 buttons: [
-                                    {text: '登录'}, {text: '取消'}
+                                    {text: '登录',
+                                         handler: function () {
+                                             var form = Ext.getCmp('loginForm');
+                                             if(form.getForm().isValid()){
+                                                   form.getForm().submit({
+                                                        clientValidation: true,
+                                                        waitMsg: '正在提交数据...',
+                                                        waitTitle: '提示',
+                                                        success: function (form, action) {
+                                                            console.log('action.result.flag = ', action.result.flag);
+                                                            if (action.result.flag == true) {
+                                                                console.log('action.result.flag == true ');
+                                                                //设置Cookie
+                                                                //new Extjs.cookie.set(action.result.userid, Ext.getCmp("username").getValue());
+                                                                //桌面应用系统
+                                                                window.location.href = "/Desktop/Main.htm";
+                                                                //传通框架应用系统
+                                                                //window.location.href = "/Normal/Main.htm";
+                                                            } else {
+                                                                Ext.Msg.alert("提示", "登陆失败:<br>" + action.result.msg);
+                                                            }
+                                                        },
+                                                        failure: function () {
+                                                            console.log('failure', arguments);
+                                                            Ext.Msg.alert("提示", "登陆失败，请与管理员联系！");
+                                                        }
+                                                    });
+                                             }
+                                         }},
+                                    {text: '重置',
+                                        handler: function () {
+                                            var form = Ext.getCmp('loginForm');
+                                            form.getForm().reset();
+                                        }}
                                 ]
                             }
                         ],
@@ -109,12 +151,15 @@
             });
 
             var framePanel = new Ext.Panel({
-        width: 626,     
-        height: 291,
+                width: 626,
+                height: 291,
 
                 renderTo: 'framePanel',
                 layout: 'absolute',
-
+                border: false,
+                style: {
+                    border:'1px solid red'
+                },
                 items :[
                   { 
                     x: 70, y: 0,
