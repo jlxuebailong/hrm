@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <!--ExtJs框架开始-->
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <!--ExtJs框架结束-->
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            var box = new Ext.BoxComponent({
+                autoEl: {
+                    tag: 'div',
+                    html: '配置项内部文本'
+                },
+                style: 'background:red;color:#fff',
+                width: 200,
+                height: 200,
+                renderTo: Ext.getBody(),
+                listeners: {
+                    'beforerender': function () {
+                        alert('beforerender');
+                    }
+                }
+            });
+            alert(box.hidden);
+            box.setWidth(400);
+            box.setHeight(400);
+
+//                        var frm = new Ext.Panel({
+//                            title: "Trigger宽度设置",
+//                            bodyStyle: "padding:5",
+//                            frame: true,
+//                            height: 100,
+//                            width: 500,
+//                            renderTo: Ext.getBody(),
+//                            items: [{
+//                                xtype: "trigger",
+//                                style: 'width:400px',
+//                                size: 'auto',
+//                                value: '字太多不换行，也显示不全怎么办，设置style'
+//                            }],
+//                            listeners: {
+//                                'beforerender': function () { alert('aa') }
+//                            }
+//                        });
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

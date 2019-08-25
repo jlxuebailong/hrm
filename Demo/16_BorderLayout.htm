@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <!--ExtJs框架开始-->
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script src="/Ext/src/locale/ext-lang-zh_CN.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <!--ExtJs框架结束-->
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            //------ContainerLayout开始------//
+            var box1 = new Ext.BoxComponent({
+                autoEl: {
+                    tag: 'div',
+                    style: 'background:red;width:300px;height:50px',
+                    html: 'box1'
+                }
+            });
+            var box2 = new Ext.BoxComponent({
+                autoEl: {
+                    tag: 'div',
+                    style: 'background:yellow;width:300px;height:50px',
+                    html: 'box2'
+                }
+            });
+            var box3 = new Ext.BoxComponent({
+                autoEl: {
+                    tag: 'div',
+                    style: 'background:blue;width:300px;height:50px;color:#fff',
+                    html: 'box3'
+                }
+            });
+            var containerlayout = new Ext.Container({
+                layout: 'form',
+                items: [box1, box2, box3],
+                renderTo: 'ContainerLayout'
+            });
+            //------ContainerLayout结束-----//
+            //------FormLayout开始------//
+            var formlayout = new Ext.Panel({
+                title: 'FormLayout',
+                layout: 'form',
+                items: [
+                    new Ext.form.TextField({ fieldLabel: '用户名' }),
+                    new Ext.form.TextField({ fieldLabel: '密码' }),
+                    new Ext.form.TextField({ fieldLabel: '重复密码' })
+                ],
+                renderTo: 'FormLayout'
+            });
+            var ColumnLayout = new Ext.Panel({
+                width: 600,
+                title: 'ColumnLayout',
+                layout: 'column',
+                items: [
+                    new Ext.form.FormPanel({ title: '第一列', columnWidth: .33, labelWidth: 50, items: [
+                        new Ext.form.TextField({ fieldLabel: '用户名' })]
+                    }),
+                    new Ext.form.FormPanel({ title: '第二列', columnWidth: .33, labelWidth: 50, items: [
+                        new Ext.form.TextField({ fieldLabel: '密码' })]
+                    }),
+                    new Ext.form.FormPanel({ title: '第三列', columnWidth: .34, labelWidth: 80, items: [
+                        new Ext.form.TextField({ fieldLabel: '重复密码' })]
+                    })
+                ],
+                renderTo: 'ColumnLayout'
+            });
+            //------FormLayout结束------//
+        });
+    </script>
+</head>
+<body>
+    <div id="BorderLayout">
+    </div>
+</body>
+</html>

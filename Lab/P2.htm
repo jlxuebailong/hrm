@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+   <style type="text/css">
+        .loginpanel{
+            position: "absolute"; 
+            vertical-align: "center";
+        }
+       .loginbgimage { 
+           background:url(../Image/my/pic_126.jpg) no-repeat ; 
+           
+           height:525px; 
+           width:290px;
+        } 
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+            Ext.BLANK_IMAGE_URL = 'Image/my/pic_126.jpg';
+            Ext.QuickTips.init();
+            Ext.lib.Ajax.defaultPostHeader += '; charset=utf-8';
+            Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+            
+
+
+            var loginPanel = new Ext.Panel({
+                //renderTo: 'loginPanel',
+                layout: 'border',
+                width: 525,
+                height: 290,
+                border: false,
+                defaults: {border: false},
+                style: 'background: #ffffff; padding-left:00px;',
+                items: [
+                    {
+                        region: 'north',
+                        height: 56,
+
+                        html: '<div></div>'
+                    },
+                    {
+                        region: 'south',
+                        height: 56,
+                        html: '<div></div>'
+                    },
+                    {
+                        region: 'west',
+                        width: 253,
+                        html: '<img src="../Image/my/pic_126.jpg" width=253 height=176 />'
+                    },
+                    {
+                        region: 'center',
+                        xtype: 'panel',
+                        layout: 'column',
+                        items:[
+                            {
+                                xtype: 'form',
+                                defaultType: 'textfield',
+                                labelAlign: 'right',
+                                labelWidth: 60,
+                                border: false,
+                                region: 'center',
+                                defaults: {border: false},
+                                style: 'background: #ffffff; padding:0px 35px 30px 16px;',
+                                items: [
+                                    {fieldLabel: '登录账号', name: 'user'},
+                                    {fieldLabel: '登录密码', name: 'pass', inputType: 'password'},
+                                    {
+                                        xtype: 'panel',
+                                        layout: 'column',
+                                        border: false,
+                                        items: [
+                                            {
+                                                columnWidth: .6, layout: 'form', border: false,
+                                                items:[
+                                                    {xtype: 'textfield', fieldLabel: '校验码', name: 'checkcode'}
+                                                ]
+                                            },
+                                            {
+                                                xtype: 'panel', columnWidth: .4, border: false,
+                                                html: '<image src="../Image/my/checkcode.gif">'
+                                            }
+                                        ]
+                                    },
+                                    
+                                ]
+                                
+                            },
+                            {
+                                xtype: 'panel',
+                                layout: 'column',
+                                border: false,
+                                style: 'background: #23456; padding:35px 35px 50px 50px;',
+                                buttons: [
+                                    {text: '登录'}, {text: '取消'}
+                                ]
+                            }
+                        ],
+
+                        
+                    }
+                ]
+
+            });
+
+            var framePanel = new Ext.Panel({
+        width: 626,     
+        height: 291,
+
+                renderTo: 'framePanel',
+                layout: 'absolute',
+
+                items :[
+                  { 
+                    x: 70, y: 0,
+                    xtype: 'panel',
+                    border: false,
+                    items: [loginPanel]
+                  
+                  }
+                ]
+            });
+
+            Ext.get('framePanel').setStyle('position','absolute').center(Ext.getBody());
+        });
+       
+    </script>
+
+</head>
+<body>
+    <!--
+    <div>
+        <div id='toppic' style='border:1px solid rgb(250,0,255);width: 99%;box-sizing: border-box;'>toppic</div>
+        <div id='leftpic' style='float:left;border:1px solid rgb(10,0,255);width: 49%;box-sizing: border-box;'>leftpic</div>
+        <div id='rightpic' style='float:left;border:1px solid rgb(250,0,10);width: 49%;box-sizing: border-box;'>rightpic</div>
+        <div id='bottompic' style='border:1px solid rgb(20,10,25);width: 99%;box-sizing: border-box;'>bottompic</div>
+    </div>-->
+    <div id='framePanel'></div>
+    <div id='loginPanel'></div>
+
+</body>
+</html>
