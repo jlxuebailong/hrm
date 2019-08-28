@@ -2,7 +2,7 @@
  * Created by gavin on 2019/8/26.
  */
 Ext.onReady(function () {
-  Ext.BLANK_IMAGE_URL = 'Image/my/pic_126.jpg';
+  //Ext.BLANK_IMAGE_URL = 'pic/blank.png';
   Ext.QuickTips.init();
   Ext.lib.Ajax.defaultPostHeader += '; charset=utf-8';
   Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
@@ -29,13 +29,6 @@ Ext.onReady(function () {
   });
 
   //3. 创建leftMenu部分
-  /*var leftMenu = new Ext.Panel({
-    region: 'west',
-    border: true,
-    width: 200,
-    html: '<div>导航菜单</div>'
-  });*/
-
   var t1 = new Ext.tree.TreePanel({
     border: false,
     rootVisible: false,
@@ -69,12 +62,10 @@ Ext.onReady(function () {
       ]
     })
   });
+
   var leftMenu = new Morik.Office.LeftMenu({
     title: '我的办公系统',
-    items:[
-      {title: '我的办公桌', items: [t1]},
-      {title: '主数据管理', items: [t2]}
-    ]
+    trees: [t1, t2]
   });
 
 
@@ -86,6 +77,10 @@ Ext.onReady(function () {
   });
 
   //5. 建立menu和tab的联系
+  leftMenu.on('nodeClick', function (nodeAttr) {
+      console.log('nodeClick event: ', nodeAttr);
+    }
+  );
 
   //6. 创建布局
   var viewport = new Ext.Viewport({
