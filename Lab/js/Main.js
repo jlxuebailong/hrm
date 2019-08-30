@@ -70,15 +70,21 @@ Ext.onReady(function () {
 
 
   //4. 创建workspace部分
-  var workspace = new Ext.Panel({
+  var mainTab = new Morik.Office.MainPanel({
     region: 'center',
-    border: true,
-    html: '<div>工作区</div>'
+    border: false,
   });
 
+  /*var mainTab = new Ext.Panel({
+    region: 'center',
+    border: false,
+    html: '<div>工作区</div>'
+  });*/
+
   //5. 建立menu和tab的联系
-  leftMenu.on('nodeClick', function (nodeAttr) {
-      console.log('nodeClick event: ', nodeAttr);
+  leftMenu.on('nodeClick', function (node) {
+      console.log('nodeClick event: ', node);
+    mainTab.loadTab(node);
     }
   );
 
@@ -86,7 +92,7 @@ Ext.onReady(function () {
   var viewport = new Ext.Viewport({
     layout: 'border',
     style: 'border: #024459 2px solid;',
-    items: [head, foot, leftMenu, workspace]
+    items: [head, foot, leftMenu, mainTab]
   });
   
 });
