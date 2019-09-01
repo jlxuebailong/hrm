@@ -79,9 +79,7 @@ Morik.Office.CompanyPanel = function (cfg) {
 };
 
 Ext.extend(Morik.Office.CompanyPanel, Ext.Panel, {
-  hello: function () {
-    console.log('hello');
-  }
+
 });
 
 
