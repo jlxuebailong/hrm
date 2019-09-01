@@ -33,15 +33,15 @@ Ext.onReady(function () {
     border: false,
     rootVisible: false,
     root: new Ext.tree.AsyncTreeNode({
-      text: '我的办公桌',
+      text: '人力资源管理',
       expanded: true,
       children: [
-        {id: 'department1', text: '部门管理1', leaf: true},
-        {id: 'company1', text: '公司管理1', leaf: true},
-        {id: 'permissions1', text: '权限管理1',
-        children: [
-          {id: 'permission1', text: '权限管理1', leaf: true},
-          {id: 'permissionType1', text: '权限类别1', leaf: true}]}
+        {id: 'company', text: '公司管理', leaf: true},
+        {id: 'department', text: '部门管理', leaf: true},
+        {id: 'permissions', text: '权限管理',
+          children: [
+            {id: 'permission', text: '权限管理', leaf: true},
+            {id: 'permissionType', text: '权限类别', leaf: true}]}
       ]
     })
   });
@@ -50,15 +50,15 @@ Ext.onReady(function () {
     border: false,
     rootVisible: false,
     root: new Ext.tree.AsyncTreeNode({
-      text: '主数据管理',
+      text: '办公资源管理',
       expanded: true,
       children: [
-        {id: 'department', text: '部门管理', leaf: true},
-        {id: 'company', text: '公司管理', leaf: true},
-        {id: 'permissions', text: '权限管理',
+        {id: 'officeRoom', text: '办公室管理', leaf: true},
+        {id: 'meetingRoom', text: '会议室管理', leaf: true},
+        {id: 'officeSupplies', text: '办公用品管理',
           children: [
-            {id: 'permission', text: '权限管理', leaf: true},
-            {id: 'permissionType', text: '权限类别', leaf: true}]}
+            {id: 'Consumables', text: '易耗品管理', leaf: true},
+            {id: 'computer', text: '计算机管理', leaf: true}]}
       ]
     })
   });
@@ -68,22 +68,25 @@ Ext.onReady(function () {
     trees: [t1, t2]
   });
 
+  var indexPanel = new Ext.Panel({
+    id: 'index',
+    title: '首页',
+    html:'<div>网络办公系统欢迎登录</div>'
+  });
 
   //4. 创建workspace部分
   var mainTab = new Morik.Office.MainPanel({
     region: 'center',
     border: false,
+    indexTab: indexPanel
   });
 
-  /*var mainTab = new Ext.Panel({
-    region: 'center',
-    border: false,
-    html: '<div>工作区</div>'
-  });*/
 
+  
+  
   //5. 建立menu和tab的联系
   leftMenu.on('nodeClick', function (node) {
-      console.log('nodeClick event: ', node);
+    //console.log('nodeClick event: ', node);
     mainTab.loadTab(node);
     }
   );
