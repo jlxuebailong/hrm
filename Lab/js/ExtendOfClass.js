@@ -36,8 +36,17 @@ Ext.extend(homeCat, Cat, {
   getAge: function () {
     console.log(this.name + ' `age is ' + this.age);
     this.superclass().getAge();
-  }
+  },
+  say: function () {
+    return function (n) {
+      console.log(n);
+    }
+  }()
 });
 
 var myCat = new homeCat();
 myCat.getAge();
+var i = 10;
+myCat.say(i);
+i += 10;
+myCat.say(i);

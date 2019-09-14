@@ -38,6 +38,7 @@ Ext.onReady(function () {
       children: [
         {id: 'company', text: '公司管理', leaf: true},
         {id: 'department', text: '部门管理', leaf: true},
+        {id: 'employee', text: '员工管理', leaf: true},
         {id: 'permissions', text: '权限管理',
           children: [
             {id: 'permission', text: '权限管理', leaf: true},

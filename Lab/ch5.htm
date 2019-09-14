@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset='utf-8'/>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+    	window.onload = function(){
+            var template = '<div id="tmp1">'
+                            +' {0}: <span>{1}</span>'
+                            +'</div>';
+
+    		var format = function(temp){
+                var args = Array.prototype.slice.call(arguments, 1);
+                return temp.replace(/\{(\d+)\}/g, function(m, i){
+                    return args[i];
+                });
+            };
+            
+            Ext.get('test1').createChild(format(template, '姓名', '张三'));
+            Ext.get('test1').createChild(format(template, '姓名', '李四'));
+
+            var mm = "{first:u0012},{second:u0023},{third:u0024}";
+            var m1 = mm.replace(/{(\w*):(\w*)}(?=(,?))/g, 'matched word is "$&" inside{$1:$2} before word is "$`" behand word is "$\'" <br>');
+            //console.log(m1);
+            Ext.get('test1').createChild('<br/><div>'+m1+'</div>');
+            var dd = function(m, s1, s2, start, whole){
+                var m = '"' + m + '" is at "'+whole+'" begin '+start+' index.';
+                m += ' it contain "' +s1 +'" and "'+s2+'" <br>';
+                return m;
+            }
+            var m2 = mm.replace(/{(\w*):(\w*)(?=(?:,?))/g, dd);
+            //console.log(m2);
+            Ext.get('test1').createChild('<br/><div>'+m2+'</div>');
+
+            var t = new Ext.Template(
+                '<div name="{id}">',
+                    '<span class="{cls}">{name:trim} {value:ellipsis(10)}</span>',
+                '</div>'
+            );
+            t.append('test1', {id: 'myid', cls: 'myclass', name: '   foo   ', value: 'barrrrrrrrrrrrrrrrrrrrrrr'});
+
+            var aa = '<div style="color: blue">'+
+            '姓名: {name:this.formatName}&nbsp;'+
+            '性别: {sex:this.formatSex}&nbsp;'+
+            '出生日期: {birthday:date(Y年m月d)}'
+            '</div>';
+
+            var formatSex = function(v, vs){
+                console.log(1, v, vs);
+                return v===1?'男':'女';
+            }
+            var formatName = function(v, vs){
+                console.log(2, v, vs);
+                var ch = vs['sex']===1?'先生':'小姐';
+                return v.slice(0,1) + ch + '('+vs['name']+')';
+            }
+
+           
+            var tpl = new Ext.Template(aa, {formatName: formatName});
+            //console.log(tpl);
+            tpl.formatSex = formatSex;
+           
+            var data = {name: '李小明', sex: 1, birthday: new Date(1980,9,24)};
+            tpl.append(document.body, data);
+
+            var data = {name: '张静香', sex: 2, birthday: new Date(1980,3,5)};
+            tpl.append(document.body, data);
+            function cc(c){
+                return 'hello:' + c;
+            }
+            var joinTest = [1,'a',2, (function(){return 's';})(), 'cc', cc('c')].join(',');
+            console.log(joinTest);
+
+            var store = new Ext.data.JsonStore({
+                url: '/Server/Lab/GetImages.php',
+                root: 'rows',
+                fields: [
+                    'name', 'url','shortName','state',
+                    {name:'size', type: 'float'},
+                    {name:'lastmod', type:'date', dateFormat:'timestamp'}
+                ]
+            });
+            store.load();
+
+            var tpl = new Ext.XTemplate(
+                '<tpl for=".">',
+                    '<div class="x-message-div">',
+                    '<img src="{url}" width=11,height=11 title="{name}"><span>{name}</span>',
+                    '</div>',
+                '</tpl>',
+                '<div class="x-clear"></div>'
+            );
+
+            var dataView = new Ext.DataView({
+                    store: store,
+                    tpl: tpl,
+                    autoHeight:true,
+                    multiSelect: true,
+                    singleSelect: true,
+                    overClass:'x-view-over',
+                    itemSelector:'div.thumb-wrap',
+                    emptyText: 'No images to display',
+                    listeners: {
+                        'click': {fn: this.showMsg, scope: this, delay: 30},
+                        'mouseleave': {fn: this.hideMsg, scope: this, delay: 300},
+                        'contextmenu': {fn: this.onContextMenu, scope: this}
+                    }
+                });
+
+            var online = {
+                text:'在线人数',
+                handler: function(){
+                    store.filterBy(function(r){
+                        return r.data['state']==1;
+                    });
+            }};
+            var filter = function(text, f){
+                if( (text != f.emptyText) && (text != f.lastValue) ){
+                    var re = new RegExp(''+Ext.escapeRe(text), 'i');
+                    console.log('re',re,text);
+                    store.filterBy(function(r){
+                        return re.test(r.data['name']);
+                    });
+                    f.lastValue = text;
+                }
+            }
+            var tfInput = function(f){
+                var f1 = function(e){
+                    var text = e.target.value;
+                    filter(text, f);
+                }
+                f.el.on('keydown', f1, f, {buffer: 20});
+                Ext.TaskMgr.start({
+                    run: function(){filter(f.el.dom.value, f);},
+                    interval: 1000
+                });
+            }
+            var tf = new Ext.form.TextField({
+                width: 100,
+                emptyText: '输入姓名',
+                lastValue: '',
+                listeners: {'render': tfInput}    
+            });    
+
+            var panel = new Ext.Panel({
+                id:'images-view',
+                frame:true,
+                width:535,
+                autoHeight:true,
+                collapsible:true,
+                layout:'fit',
+                title:'Simple DataView',
+                pageSize: 10,
+                items: [dataView],
+                tbar:[tf,'-',online],
+                bbar: new Ext.PagingToolbar({pageSize: this.pageSize, store: store})
+            });
+
+            panel.render(document.body);
+
+    	};
+    </script>
+</head>
+<body>
+    <div id="test1" style="margin-top: 200px;">
+    </div>
+</body>
+</html>

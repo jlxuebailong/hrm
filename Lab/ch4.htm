@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var a = document.getElementById('test1');
+            Ext.get('test1').on('click',function(e, t, o){
+                //if(e) e.preventDefault(); //
+                console.log(e, ' event: ', 'on...', o.msg);
+            }, this, {stopEvent: true, msg: 'This is a private msg!'});
+    		console.log(a);
+    		var e1 = function(e){
+    			if(e) e.preventDefault();
+    			console.log(e, ' event: ', 'e1')
+    		}
+    		var e2 = function(e){
+    			if(e) e.preventDefault();
+    			console.log(e, ' event: ', 'e2')
+    		}
+    		if(a.addEventListener){//FireFox Chrome Sarfa
+    			a.addEventListener('click', e1, false);
+    			a.addEventListener('click', e2, false);
+    			console.log('from addEventListener');
+    		}else if(a.attachEvent){//IE
+    			a.attachEvent('onclick', e1);
+    			a.attachEvent('onclick', e2);
+    			console.log('from attachEvent');
+    		}
+
+    	};
+    </script>
+</head>
+<body>
+    <div style="margin-top: 200px;">
+        <a href='www.sina.com' style="cursor: hand;" target="_blank" id='test1'>Please Click Me!</a>
+    </div>
+</body>
+</html>

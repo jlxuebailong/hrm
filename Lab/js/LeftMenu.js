@@ -16,7 +16,7 @@ Morik.Office.LeftMenu = function (cfg) {
   
   cfg = Ext.apply(dfg, {layout: 'accordion', collapsible: true});
 
-  Morik.Office.LeftMenu.superclass.constructor.call(this, cfg||{});
+  Morik.Office.LeftMenu.superclass.constructor.call(this, dfg||{});
   
   for(var i=0; i<this.trees.length; i++){
     this.add({
