@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset='utf-8'/>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+    <style>
+        .tw{border-top-width: 0px}
+        .bw{border-bottom-width: 0px}
+        .lw{border-left-width: 0px}
+        .rw{border-right-width: 0px}
+        .bor{border: none; border-collapse: collapse;}
+        #otc td{height: 22px; text-align: center; vertical-align: middle;}
+        #otc td.bgan{text-align: left!important; height: 70px;}
+        .center{text-align: center;}
+        #otc table .gb23{font-family: '楷体_GB2312',Verdana, Arial, Helvetica, sans-serif; font-size: 13px;}
+        .hdbd{width: 100%; height: 100%; background: transparent; border: 0px;}
+
+    </style>
+    <script type="text/javascript">
+    	window.onload = function(){
+            //var el = new Ext.Element('test1');
+            //console.log(el);
+            var el = Ext.get('test1');
+            console.log(el);
+            var id = Ext.id(el);
+            console.log(id);
+    	};
+    </script>
+</head>
+<body>
+    <div id="test1" style="margin-top: 100px;">
+    </div>
+    <div id="otc" style="margin-left: 10px;">
+        <table width="929" border="1" bordercolor="#000000" 
+        style="border-collapse: collapse" cellpadding="0" cellspacing="0">
+            <tr>
+                <td colspan="10">
+                    <input type="text" name="title" id="title" class="gb23 hdbd center" value="OTC个性渠道促销申请表" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="bgan">
+                    <textarea name="backanalysis" id="backanalysis" class="gb23 hdbd">背影分析：</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width: 180px;">开始时间</td>
+                <td colspan="3">
+                    <input type="text" name="starttime" id="starttime" class="gb23 hdbd"/>
+                </td>
+                <td colspan="2">结束时间</td>
+                <td colspan="3">
+                    <input type="text" name="endtime" id="endtime" class="gb23 hdbd"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="rw">活动主题：</td>
+                <td colspan="8" class="lw">
+                    <input type="text" name="clientname" id="clientname" class="gb23 hdbd"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="rw">活动主题：</td>
+                <td colspan="8" class="lw">
+                    <input type="text" name="topic" id="topic" class="gb23 hdbd"/>
+                </td>
+            </tr>
+             <tr>
+                <td colspan="2" class="rw" style="vertical-align: top;">活动形式：</td>
+                <td colspan="8" class="lw" style="height: 70px">
+                    <textarea name="activitystyle" id="activitystyle" class="gb23 hdbd"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">开展地区</td>
+                <td colspan="8">
+                    <input type="text" name="area" id="area" class="gb23 hdbd"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">促销目标</td>
+                <td colspan="3">
+                    <table border="1" bordercolor="#000000" class="bor"
+                    cellpadding="0" cellspacing="0" width="100%" height="100%">
+                        <tr>
+                            <td colspan="3" class="tw lw rw">活动前</td>
+                        </tr>
+                        <tr>
+                            <td class="lw rw  gb23 tw">
+                                布货家数
+                            </td>
+                            <td class="rw gb23 tw">
+                                覆盖率%
+                            </td>
+                            <td class="rw gb23 tw">
+                                销量
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lw rw bw gb23 tw">
+                                <input type="text" name="shopcount" id="shopcount" class="gb23 hdbd center"/>
+                            </td>
+                            <td class="rw bw gb23 tw">
+                                <input type="text" name="shopper" id="shopper" class="gb23 hdbd center">
+                            </td>
+                            <td class="rw bw gb23 tw">
+                                <input type="text" name="salecount" id="salecount" class="gb23 hdbd center">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="5">
+                    <table border="1" bordercolor="#000000" class="bor"
+                    cellpadding="0" cellspacing="0" width="100%" height="100%">
+                        <tr>
+                            <td colspan="5" class="tw lw rw">活动后</td>
+                        </tr>
+                        <tr>
+                            <td class="lw rw  gb23 tw">
+                                覆盖家数
+                            </td>
+                            <td class="rw gb23 tw">
+                                增长率%
+                            </td>
+                            <td class="rw gb23 tw">
+                                覆盖率%
+                            </td>
+                            <td class="rw gb23 tw">
+                                销量
+                            </td>
+                            <td class="rw gb23 tw">
+                                增长率%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lw rw bw gb23 tw">
+                                <input type="text" name="shopcount" id="shopcount" class="gb23 hdbd center"/>
+                            </td>
+                            <td class="rw bw gb23 tw">
+                                <input type="text" name="shopper" id="shopper" class="gb23 hdbd center">
+                            </td>
+                            <td class="rw bw gb23 tw">
+                                <input type="text" name="salecount" id="salecount" class="gb23 hdbd center">
+                            </td>
+                            <td class="rw bw gb23 tw">
+                                <input type="text" name="shopper" id="shopper" class="gb23 hdbd center">
+                            </td>
+                            <td class="rw bw gb23 tw">
+                                <input type="text" name="salecount" id="salecount" class="gb23 hdbd center">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
