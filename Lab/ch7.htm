@@ -73,7 +73,8 @@
              <tr>
                 <td colspan="2" class="rw" style="vertical-align: top;">活动形式：</td>
                 <td colspan="8" class="lw" style="height: 70px">
-                    <textarea name="activitystyle" id="activitystyle" class="gb23 hdbd"></textarea>
+                    <textarea name="activitystyle" id="activitystyle" class="gb23 hdbd" 
+                    onpropertychange='if(this.scrollHeight>40) this.style.posHeight=this.scrollHeight+5;'></textarea>
                 </td>
             </tr>
             <tr>
@@ -91,7 +92,7 @@
                             <td colspan="3" class="tw lw rw">活动前</td>
                         </tr>
                         <tr>
-                            <td class="lw rw  gb23 tw">
+                            <td class="lw rw  gb23 tw" style="width: 100px;">
                                 布货家数
                             </td>
                             <td class="rw gb23 tw">
@@ -139,22 +140,131 @@
                         </tr>
                         <tr>
                             <td class="lw rw bw gb23 tw">
-                                <input type="text" name="shopcount" id="shopcount" class="gb23 hdbd center"/>
+                                <input type="text" name="covercount" id="covercount" class="gb23 hdbd center"/>
                             </td>
                             <td class="rw bw gb23 tw">
-                                <input type="text" name="shopper" id="shopper" class="gb23 hdbd center">
+                                <input type="text" name="coveraddper" id="coveraddper" class="gb23 hdbd center">
                             </td>
                             <td class="rw bw gb23 tw">
-                                <input type="text" name="salecount" id="salecount" class="gb23 hdbd center">
+                                <input type="text" name="coverper" id="coverper" class="gb23 hdbd center">
                             </td>
                             <td class="rw bw gb23 tw">
-                                <input type="text" name="shopper" id="shopper" class="gb23 hdbd center">
+                                <input type="text" name="plansalecount" id="plansalecount" class="gb23 hdbd center">
                             </td>
                             <td class="rw bw gb23 tw">
-                                <input type="text" name="salecount" id="salecount" class="gb23 hdbd center">
+                                <input type="text" name="plansaleaddper" id="plansaleaddper" class="gb23 hdbd center">
                             </td>
                         </tr>
                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">促销费用</td>
+                <td colspan="8">
+                    <table border="1" bordercolor="#000000" class="bor"
+                    cellpadding="0" cellspacing="0" width="100%" height="100%">
+                        <tr>
+                            <td class="lw rw  gb23 tw" style="width: 100px;">
+                                返货
+                            </td>
+                            <td class="rw gb23 tw" colspan="7">
+                                    <table border="1" bordercolor="#000000" class="bor"
+                    cellpadding="0" cellspacing="0" width="100%" height="100%">
+                                        <tr>
+                                            <td class="lw bw tw gb23" style="width: 170px;">品名</td>
+                                            <td class="lw bw tw gb23">单价</td>
+                                            <td class="lw bw tw gb23">数量</td>
+                                            <td class="lw bw tw gb23">金额</td>
+                                            <td class="lw rw bw tw gb23" style="width: 210px;">备注</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lw rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lw rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lw rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                            <td class="rw bw gb23">
+                                                <input type="text" name="x" id="x" class="gb23 hdbd center">
+                                            </td>
+                                        </tr>
+                                    </table>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="lw rw bw gb23">
+                                返现
+                            </td>
+                            <td class="rw bw gb23" colspan="7">
+                                <input type="text" name="returnMoney" id="returnMoney" class="gb23 hdbd center">
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="lw rw bw gb23">
+                                辅助费用
+                            </td>
+                            <td class="rw bw gb23" colspan="7">
+                                <input type="text" name="otherMoney" id="otherMoney" class="gb23 hdbd center">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">费用总计</td>
+                <td colspan="3">
+                    <input type="text" name="totalMoney" id="totalMoney" class="gb23 hdbd"/>
+                </td>
+                <td colspan="2">投入产出比</td>
+                <td colspan="3">
+                    <input type="text" name="x" id="x" class="gb23 hdbd"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <input type="button" style="width: 100px; margin-top:10px; margin-bottom: 10px;" value="提交">
+                    <input type="button" style="width: 100px;" value="复位">
                 </td>
             </tr>
         </table>
