@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+    <style type="text/css">
+        #dragDiv{
+            border: 1px dashed #fff000;
+            width: 100px; height: 60px;
+            font-size: 0;
+            position: absolute;
+            cursor:move;
+        }
+        #sbr, #sbl, #stl, #str, #src, #slc, #stc, #sbc{
+            border: 1px solid #333;
+            width: 6px; height: 6px;
+            font-size: 0;
+            position: absolute;
+            background-color: #333;
+        }
+
+
+        #sbl{left: -4px; bottom: -4px;cursor:sw-resize;}
+        #str{right: -4px; top: -4px;cursor:ne-resize;}
+        #sbr{right: -4px; bottom: -4px;cursor:se-resize;}
+        #stl{left: -4px; top: -4px;cursor:nw-resize;}
+
+        #src{right: -4px; top: 50%; margin-top: -4px;cursor:e-resize;}
+        #slc{left: -4px; top: 50%; margin-top: -4px;cursor:w-resize;}
+        #stc{top: -4px; left: 50%; margin-left: -4px;cursor:n-resize;}
+        #sbc{bottom: -4px; left: 50%; margin-left: -4px;cursor:s-resize;}
+    </style>
+    <script type="text/javascript">
+    	
+    </script>
+</head>
+<body bgcolor='#666666'>
+    <div id="dragDiv" style="margin-left: 100px;margin-top: 200px;">
+        
+        <div id="sbr"></div><div id="sbl"></div>
+        <div id="str"></div><div id="stl"></div>
+        <div id="src"></div><div id="slc"></div>
+        <div id="stc"></div><div id="sbc"></div>
+
+    </div>
+</body>
+</html>

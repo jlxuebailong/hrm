@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+   
+    <script type="text/javascript">
+        Ext.form.Myimg = Ext.extend(Ext.BoxComponent, {
+            onRender: function(ct, pos){
+                if(!this.el){
+                    this.el = document.createElement('img');
+                    this.el.src = this.src;
+                }
+                Ext.form.Label.superclass.onRender.call(this, ct, pos);
+            },
+            afterRender: function(){
+                Ext.form.Myimg.superclass.afterRender.call(this);
+                var me = this;
+                this.el.on('click', function(){
+                    console.log('this.handler.type: ', Ext.type(me.handler));
+                    if(me.handler === true){
+                        me.el.dom.src = me.src + '?d=' + new Date();
+                    }else if(Ext.type(me.handler)==='function'){
+                        me.handler(this);
+                    }
+                    //me.fireEvent('click', this);
+                });
+            }
+        });
+        Ext.reg('img', Ext.form.Myimg);
+        
+    	window.onload = function(){
+            var win = new Ext.Window({
+                id:'dd',
+                title:'CaCa',
+                width: 800,
+                height: 600,
+                renderTo: Ext.getBody(),
+                layout: 'form',
+                items:[
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: '姓名',
+                        labelSeparator: ' :> ',
+                        name: 'Name',
+                        width: 90,
+                        labelStyle: 'width: 60px;font-weight:bold;'
+                    },
+                    {
+                        xtype: 'img',
+                        src: '/Image/my/pic_126.jpg',
+                        handler: function(cmp){
+                            cmp.dom.src = this.src + '?d=' + new Date();
+                        }
+                    }
+                ]
+                }
+            );
+
+            win.show();
+            //console.log(win);
+
+            var plugin = function(){
+                this.init = function(comp){
+                    console.log('init....', comp.id);
+                }
+            };
+            //console.log(plugin);
+            var myplugin = new plugin();
+            var myComp = new Ext.Component({id:'myCompId',plugins: myplugin});
+            //console.log(myComp);
+        }
+    </script>
+</head>
+<body>
+   
+</body>
+</html>
