@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext5/resources/ext-theme-neptune-all-debug.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
+
+   <style type="text/css">
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+           Ext.define('My.Base', {
+               constructor: function (x) {
+                 console.log('My.Base`s constructor');
+                   this.x = x;
+               },
+     
+               statics: {
+                   method: function (x) {
+                       return x;
+                   }
+               }
+           });
+     
+           Ext.define('My.Derived', {
+               extend: 'My.Base',
+     
+               constructor: function () {
+                console.log('My.Derived`s constructor');
+                   this.callParent([21]);
+               }
+           });
+     
+           //var obj = new My.Derived();
+           //Ext.Msg.alert('Do [callParent] Lab', 'My.Derived.x: ' + obj.x); //alerts 21
+
+            Ext.define('My.DerivedOverride', {
+               override: 'My.Derived',
+     
+               constructor: function (x) {
+                    console.log('My.DerivedOverride`s constructor');
+                   this.callParent([x * 2]); // calls original My.Derived constructor
+               }
+            });
+         
+            var obj = new My.Derived();
+         
+            Ext.Msg.alert('Do [callParent] Lab', 'My.Derived.x: ' + obj.x);  // now alerts 42
+
+
+         });
+
+         
+
+       
+    </script>
+
+</head>
+<body>
+
+    <div id='d1'></div>
+
+</body>
+</html>

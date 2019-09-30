@@ -17,6 +17,7 @@
         Ext.onReady(function(){
            Ext.define('My.Base', {
                constructor: function (x) {
+                 console.log('My.Base`s constructor');
                    this.x = x;
                },
      
@@ -31,13 +32,28 @@
                extend: 'My.Base',
      
                constructor: function () {
+                console.log('My.Derived`s constructor');
                    this.callParent([21]);
                }
            });
      
-           var obj = new My.Derived();
+           //var obj = new My.Derived();
+           //Ext.Msg.alert('Do [callParent] Lab', 'My.Derived.x: ' + obj.x); //alerts 21
+
+            Ext.define('My.DerivedOverride', {
+               override: 'My.Derived',
      
-           Ext.Msg.alert('Do [callParent] Lab', 'My.Derived.x: ' + obj.x); //alerts 21
+               constructor: function (x) {
+                    console.log('My.DerivedOverride`s constructor');
+                   this.callParent([x * 2]); // calls original My.Derived constructor
+               }
+            });
+         
+            var obj = new My.Derived();
+         
+            Ext.Msg.alert('Do [callParent] Lab', 'My.Derived.x: ' + obj.x);  // now alerts 42
+
+
          });
 
          
@@ -48,7 +64,7 @@
 </head>
 <body>
 
-    <div id='d1'></div>
+  
 
 </body>
 </html>

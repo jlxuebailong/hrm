@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+
+    <!--ExtJs框架开始-->
+    
+    <!-- neptune 
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/neptune/ext-theme-neptune-all-debug.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
+    -->
+    <!-- crisp -->
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/crisp/ext-theme-crisp-all-debug.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-crisp-debug.js"></script>
+    
+
+    <!-- classic 
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/classic/ext-theme-classic-all-debug.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-classic-debug.js"></script>
+    -->
+    <!-- gray 
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/gray/ext-theme-gray-all-debug.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-gray-debug.js"></script>
+    -->
+    <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
+
+   <style type="text/css">
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+          var Morik = {};
+          Morik.Office = {};
+          Morik.Office.LeftMenu = function (cfg) {
+
+            //缺省配置
+            var dfg = Ext.apply({
+              split: true,
+              region: 'west',
+              width: 200,
+              defaults: {border: true},
+              layoutConfig: {animate: true}
+            }, cfg || {} );
+            
+            cfg = Ext.apply(dfg, {layout: 'accordion', collapsible: true});
+
+            Morik.Office.LeftMenu.superclass.constructor.call(this, dfg||{});
+            
+            for(var i=0; i<this.trees.length; i++){
+              console.log(i,this.trees[i].getStore());
+              this.add({
+                title: '['+i+']',
+                items:[this.trees[i]]
+              });
+            }
+
+            //this.addEvents('nodeClick');
+            //this.initTreeEvent();
+
+          }
+          Ext.extend(Morik.Office.LeftMenu, Ext.Panel, {
+            initTreeEvent: function () {
+              if(!this.items) return;
+              for(var i=0; i<this.items.length; i++){
+                var p = this.items.itemAt(i);
+                if(p) var t = p.items.itemAt(0);
+                if(t) t.on({
+                  'click': function (node, event) {
+                    if(node && node.isLeaf()){
+                      event.stopEvent();
+                      this.ownerCt.ownerCt.fireEvent('nodeClick', node.attributes);
+                    }
+                  }
+                });
+              }
+
+            }
+          });
+
+        var store = Ext.create('Ext.data.TreeStore', {
+            root: {
+                text: '办公资源管理',
+                expanded: true,
+                children: [
+                  {id: 'officeRoom', text: '办公室管理', leaf: true},
+                  {id: 'meetingRoom', text: '会议室管理', leaf: true},
+                  {id: 'officeSupplies', text: '办公用品管理',
+                    children: [
+                      {id: 'consumables', text: '易耗品管理', leaf: true},
+                      {id: 'computer', text: '计算机管理', leaf: true}]}
+                ]
+            }
+        });
+
+        var officeTree = new Ext.tree.Panel({
+            width: '100%',
+            height: '100%',
+            store: store,
+            rootVisible: false
+        });
+
+         var officeTree2 = new Ext.tree.Panel({
+            width: '100%',
+            height: '100%',
+            store: store,
+            rootVisible: false
+        });
+
+        var menuPanel = new Morik.Office.LeftMenu({
+              title: '我的办公系统',
+              trees: [officeTree, officeTree2]
+        }); 
+
+
+         Ext.create('Ext.container.Viewport', {
+          layout: 'border',
+          renderTo: Ext.getBody(),
+          items: [{
+              region: 'north',
+              html: '<h1 class="x-panel-header">Page Title</h1>',
+              border: false,
+              margin: '0 0 5 0'
+          }, 
+              menuPanel
+          , {
+              region: 'south',
+              title: 'South Panel',
+              collapsible: true,
+              html: 'Information goes here',
+              split: true,
+              height: 100,
+              minHeight: 100
+          }, {
+              region: 'east',
+              title: 'East Panel',
+              collapsible: true,
+              split: true,
+              width: 150
+          }, {
+              region: 'center',
+              xtype: 'tabpanel', // TabPanel itself has no title
+              activeTab: 0,      // First tab active by default
+              items: {
+                  title: 'Default Tab',
+                  html: 'The first tab\'s content. Others may be added dynamically'
+              }
+          }]
+        });
+       });
+
+         
+
+       
+    </script>
+
+</head>
+<body>
+
+  
+
+</body>
+</html>
