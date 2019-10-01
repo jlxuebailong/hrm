@@ -40,7 +40,7 @@
 
             //缺省配置
             var dfg = Ext.apply({
-              split: true,
+              split: false,
               region: 'west',
               width: 200,
               defaults: {border: true},
@@ -113,6 +113,7 @@
 
         var menuPanel = new Morik.Office.LeftMenu({
               title: '我的办公系统',
+              margin: '0 2 0 0',
               trees: [officeTree, officeTree2]
         }); 
 
@@ -124,7 +125,7 @@
               region: 'north',
               html: '<h1 class="x-panel-header">Page Title</h1>',
               border: false,
-              margin: '0 0 5 0'
+              margin: '0 0 2 0'
           }, 
               menuPanel
           , {
@@ -132,15 +133,17 @@
               title: 'South Panel',
               collapsible: true,
               html: 'Information goes here',
-              split: true,
+              split: false,
               height: 100,
-              minHeight: 100
+              minHeight: 100,
+              margin: '2 0 0 0'
           }, {
               region: 'east',
               title: 'East Panel',
               collapsible: true,
-              split: true,
-              width: 150
+              split: false,
+              width: 150,
+              margin: '0 0 0 2'
           }, {
               region: 'center',
               xtype: 'tabpanel', // TabPanel itself has no title
