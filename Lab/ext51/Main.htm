@@ -6,28 +6,11 @@
     <title></title>
 
     <!--ExtJs框架开始-->
-    
-    <!-- neptune 
+    <!-- neptune -->
     <link rel="stylesheet" type="text/css" href="/Ext5/theme/neptune/ext-theme-neptune-all-debug.css" />
     <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
     <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
-    -->
-    <!-- crisp -->
-    <link rel="stylesheet" type="text/css" href="/Ext5/theme/crisp/ext-theme-crisp-all-debug.css" />
-    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
-    <script type="text/javascript" src="/Ext5/ext-theme-crisp-debug.js"></script>
     
-
-    <!-- classic 
-    <link rel="stylesheet" type="text/css" href="/Ext5/theme/classic/ext-theme-classic-all-debug.css" />
-    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
-    <script type="text/javascript" src="/Ext5/ext-theme-classic-debug.js"></script>
-    -->
-    <!-- gray 
-    <link rel="stylesheet" type="text/css" href="/Ext5/theme/gray/ext-theme-gray-all-debug.css" />
-    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
-    <script type="text/javascript" src="/Ext5/ext-theme-gray-debug.js"></script>
-    -->
     <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
 
    <style type="text/css">
@@ -43,33 +26,35 @@
               split: false,
               region: 'west',
               width: 200,
-              defaults: {border: true},
+              defaults: {border: false},
               layoutConfig: {animate: true}
             }, cfg || {} );
             
-            cfg = Ext.apply(dfg, {layout: 'accordion', collapsible: true});
+            cfg = Ext.apply(dfg, {layout: 'accordion', collapsible: false});
 
             Morik.Office.LeftMenu.superclass.constructor.call(this, dfg||{});
             
             for(var i=0; i<this.trees.length; i++){
-              console.log(i,this.trees[i].getStore());
               this.add({
-                title: '['+i+']',
-                items:[this.trees[i]]
+                title: this.trees[i].getStore().getRoot().getData().text,
+                items: [this.trees[i]]
               });
             }
 
             //this.addEvents('nodeClick');
-            //this.initTreeEvent();
+            this.initTreeEvent();
 
           }
           Ext.extend(Morik.Office.LeftMenu, Ext.Panel, {
             initTreeEvent: function () {
               if(!this.items) return;
               for(var i=0; i<this.items.length; i++){
-                var p = this.items.itemAt(i);
-                if(p) var t = p.items.itemAt(0);
-                if(t) t.on({
+                var p = this.items.items[i];
+                //console.log(i, p);
+                if(p) var t = p.items[0];
+                if(t) {
+                  console.log(i,'->',t);
+                  t.on({
                   'click': function (node, event) {
                     if(node && node.isLeaf()){
                       event.stopEvent();
@@ -78,13 +63,35 @@
                   }
                 });
               }
+              }
 
+            },
+            afterRender: function(){
+              //console.log('this.items', this.items);
+              //this.initTreeEvent();
+              //console.log('afterRender');
+              this.superclass.afterRender.call(this);
             }
           });
 
-        var store = Ext.create('Ext.data.TreeStore', {
+        var store1 = Ext.create('Ext.data.TreeStore', {
             root: {
-                text: '办公资源管理',
+                text: '办公资源管理1',
+                expanded: true,
+                children: [
+                  {id: 'officeRoom', text: '办公室管理', leaf: true},
+                  {id: 'meetingRoom', text: '会议室管理', leaf: true},
+                  {id: 'officeSupplies', text: '办公用品管理',
+                    children: [
+                      {id: 'consumables', text: '易耗品管理', leaf: true},
+                      {id: 'computer', text: '计算机管理', leaf: true}]}
+                ]
+            }
+        });
+
+        var store2 = Ext.create('Ext.data.TreeStore', {
+            root: {
+                text: '办公资源管理2',
                 expanded: true,
                 children: [
                   {id: 'officeRoom', text: '办公室管理', leaf: true},
@@ -98,16 +105,12 @@
         });
 
         var officeTree = new Ext.tree.Panel({
-            width: '100%',
-            height: '100%',
-            store: store,
+            store: store1,
             rootVisible: false
         });
 
          var officeTree2 = new Ext.tree.Panel({
-            width: '100%',
-            height: '100%',
-            store: store,
+            store: store2,
             rootVisible: false
         });
 

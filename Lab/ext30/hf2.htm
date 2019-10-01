@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>深入浅出Ext Js</title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
+   <style type="text/css">
+        
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+            //Ext.Msg.alert('hello', 'world');
+            Person = function(name){
+                this.name = name;
+                this.addEvents('walk', 'eat', 'sleep');
+            }
+            Ext.extend(Person, Ext.util.Observable, {
+                info: function(event){
+                    return this.name + ' is ' + event + 'ing.';
+                }
+            });
+
+            var person = new Person('caca');
+            person.on('walk', function(){
+                Ext.Msg.alert('event', person.name + '在走啊走啊。');
+            });
+            person.on('eat', function(breakfast, lunch, supper){
+                Ext.Msg.alert('event', person.name + '要吃' + breakfast + ', ' + lunch + '和' + supper + '。');
+            });
+            person.on('sleep', function(time){
+                alert(person.name + '从' + time.format('H') + '点开始睡觉。');
+                console.log('event', person.name + '从' + time.format('H') + '点开始睡觉。');
+            });
+            person.on('sleep', function(){
+                alert(person.name + '再睡一会儿。');
+                console.log('event', person.name + '再睡一会儿。');
+            });
+
+
+            Ext.get('walk').on('click', 
+                function(e, el, args){
+                    person.fireEvent('walk');
+                    console.log(args.testId);
+                }, 
+                this,           //执行范围
+                {
+                    single: true,//只触发执行1次
+                    buffer: 1000,//延迟1秒触发，并且不重复执行；同delay功能相同
+                    testId: 4    //自定义参数
+                }
+            );
+
+            //给person对象注册事件拦截器，所有的事件在触发前都先执行拦截器的代码，如果返回true,则继续执行注册事件； 
+            //如果返回false则不执行注册事件。
+             Ext.util.Observable.capture(person, function(){
+                        console.log('capture this click');
+                        return true;
+                    })
+             //或在点击时延迟再注册拦截器
+            /*Ext.get('walk').on('click', 
+                function(){
+                    Ext.util.Observable.capture(person, function(){
+                        console.log('capture this click');
+                        return true;
+                    })
+                }
+            );*/
+
+            Ext.get('eat').on('click', function(){
+                person.fireEvent('eat', '早餐', '中餐', '晚餐');
+            });
+            Ext.get('sleep').on('click', function(){
+                person.fireEvent('sleep', new Date());
+            });
+           
+
+        });
+    </script>
+
+</head>
+<body>
+  <div id="test1" style="margin-top: 200px;">
+      <button id="walk">Walk</button>
+      <button id="eat">Eat</button>
+      <button id="sleep">Sleep</button>
+  </div>
+
+</body>
+</html>
