@@ -37,7 +37,7 @@
             });
             person.on('sleep', function(){
                 alert(person.name + '再睡一会儿。');
-                console.log('event', person.name + '再睡一会儿。');
+                console.log('event', person.name + '要再睡一会儿。');
             });
 
 
@@ -77,6 +77,51 @@
                 person.fireEvent('sleep', new Date());
             });
            
+            var box = new Ext.BoxComponent({
+                el: 'test2',
+                style: 'background-color:red; position:absolute;',
+                pageX: 100,
+                pageY: 250,
+                width: 200,
+                height: 150
+            });
+            box.render();
+
+            var panel = new Ext.Panel({
+                el: 'test3',
+                title: '社会主义好',
+                floating: true,
+                shadow: true,
+                draggable: true,
+                collapsible: true,
+                html: '儿子穿衣服',
+                pageX: 100,
+                pageY: 50,
+                width: 200,
+                height: 150
+            });
+            panel.render();
+
+            var tabs = new Ext.TabPanel({
+                el: 'test4',
+                floating: true,
+                shadow: false,
+                pageX: 100,
+                pageY: 450,
+                width: 200,
+                height: 150,
+            });
+            tabs.add({
+                title: '标题1',
+                html: '内容1'
+            });
+            tabs.add({
+                title: '标题2',
+                html: '内容2',
+                closable: true
+            });
+            tabs.render();
+            tabs.activate(0);
 
         });
     </script>
@@ -88,6 +133,8 @@
       <button id="eat">Eat</button>
       <button id="sleep">Sleep</button>
   </div>
-
+  <div id="test2"></div>
+  <div id="test3"></div>
+  <div id="test4"></div>
 </body>
 </html>
