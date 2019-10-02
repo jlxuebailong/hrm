@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>深入浅出Ext Js</title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
+   <style type="text/css">
+        
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+           
+           var data = {id: 123, name: 'CaCa'};
+           var encodedData = Ext.encode(data);
+           console.log(typeof encodedData, encodedData);
+           var urlEncodedData = Ext.urlEncode(data);
+           console.log(typeof urlEncodedData, urlEncodedData);
+           var encodedURIData = encodeURIComponent(encodedData);
+           console.log(typeof encodedURIData, encodedURIData);
+
+           var arr = [1,2,3,4];
+           var sum = 0;
+           Ext.each(arr, function(item){
+                sum += item;
+           });
+           console.log(sum);
+
+           App = {
+            sum: 0,
+            fn: function(item){
+                this.sum += item;
+            }
+           }
+           Ext.each(arr, App.fn, App);
+           console.log(App.sum);
+           
+        });
+    </script>
+
+</head>
+<body>
+  <div id="test1" style="margin-top: 200px;">
+     
+  </div>
+ 
+</body>
+</html>

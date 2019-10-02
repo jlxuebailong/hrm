@@ -123,6 +123,14 @@
             tabs.render();
             tabs.activate(0);
 
+            var btns = Ext.select('div button');
+            console.log(btns);
+            btns.each(function(b){
+                b.setStyle('width', '100px');
+                b.setStyle('background-color', '#f0f0f0');
+                console.log(b);
+            })
+
         });
     </script>
 
