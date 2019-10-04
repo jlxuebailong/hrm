@@ -69,14 +69,46 @@ Ext.onReady(function () {
     trees: [t1, t2]
   });
 
-  var indexPanel = new Ext.Panel({
+  var indexPanel = new Ext.ux.Portal({
     id: 'index',
     title: '首页',
-    html:'<div>网络办公系统欢迎登录</div>'
+    items: [{
+      columnWidth: 0.33,
+      style: 'padding: 10px 0 10px 10px',
+      items: [{
+        title: 'portal1',
+        height: 200,
+        html: 'portal1'
+      }]
+    },
+    {
+      columnWidth: 0.33,
+      style: 'padding: 10px 0 10px 10px',
+      items: [{
+        title: 'portal2',
+        height: 200,
+        html: 'portal2'
+      }]
+    },
+    {
+      columnWidth: 0.33,
+      style: 'padding: 10px 0 10px 10px',
+      items: [{
+        title: 'portal3',
+        height: 200,
+        html: 'portal3'
+      }]
+    }]
   });
 
   //4. 创建workspace部分
-  var mainTab = new Morik.Office.MainPanel({
+  /*var mainTab = new Morik.Office.MainPanel({
+    region: 'center',
+    border: false,
+    indexTab: indexPanel
+  });*/
+
+   var mainTab = new Morik.Office.MainPanel({
     region: 'center',
     border: false,
     indexTab: indexPanel

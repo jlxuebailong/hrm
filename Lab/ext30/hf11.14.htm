@@ -40,6 +40,26 @@
                     }
                 }
             });
+
+            var keyMap = new Ext.KeyMap('text1', {
+                key: 'abcd',
+                fn: function(e){
+                    keyMap.el.setStyle('backgroundColor', 'red');
+                    var fn = function(){
+                        keyMap.el.setStyle('backgroundColor', 'white');
+                    }
+                    fn.defer(1000);
+                }
+            });
+
+            var sayHi = function(name){
+                alert('Hi ' + name);
+            }
+            new Ext.Button({
+                text: 'Say Hi',
+                renderTo: 'btn1',
+                handler: sayHi.createCallback('Fred')
+            });
         });
     </script>
 
@@ -49,6 +69,8 @@
   <div id="result" style="margin-top: 50px;"></div>
   <div id="result" style="margin-top: 50px;">
       <textarea id="text1">CaCa</textarea>
+  </div>
+  <div id="btn1" style="margin-top: 50px;">
   </div>
 </body>
 </html>
