@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>深入浅出Ext Js</title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
+   <style type="text/css">
+        
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+             var cp = new Ext.state.CookieProvider();
+             console.log('CookieProvider: ', cp);
+            Ext.state.Manager.setProvider(cp);
+
+            var viewport = new Ext.Viewport({
+                layout: 'border',
+                items: [
+                    {
+                        stateId: 'vpnorth',
+                        region: 'north',
+                        height: 50,
+                        split: true
+                    },
+                    {
+                        stateId: 'vpsouth',
+                        region: 'south',
+                        height: 50,
+                        split: true
+                    },
+                    {
+                        stateId: 'vpwest',
+                        region: 'west',
+                        width: 50,
+                        split: true
+                    },
+                    {
+                        stateId: 'vpeast',
+                        region: 'east',
+                        width: 50,
+                        split: true
+                    },
+                    {
+                        stateId: 'vpcenter',
+                        region: 'center'
+                    }
+                ]
+            });
+            
+            var win = new Ext.Window({
+                title: 'CaCa',
+                width: 300,
+                height: 200,
+                stateId: 'win32',
+            });
+            win.show();
+
+
+        
+
+        });
+    </script>
+
+</head>
+<body>
+  <div id="test1" style="margin-top: 200px;">
+     
+  </div>
+ 
+</body>
+</html>

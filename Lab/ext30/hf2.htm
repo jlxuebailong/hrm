@@ -13,6 +13,29 @@
    </style>
     <script type="text/javascript">
         Ext.onReady(function(){
+
+            
+            Ext.apply(Ext.QuickTips, {
+                maxWidth: 200,
+                minWidth: 100,
+                showDelay: 50,
+                dismissDelay: 1000,
+                hideDelay: 500,
+                trackMouse: true,
+                animate: true
+
+            });
+            Ext.QuickTips.init();
+
+            Ext.QuickTips.register({
+                target: 'walk',
+                title: '走啊走',
+                text: 'CaCa走去哪里也不知道！',
+                trackMouse: true,
+                animate: true,
+                autoHide: false
+            });
+
             //Ext.Msg.alert('hello', 'world');
             Person = function(name){
                 this.name = name;
@@ -138,7 +161,7 @@
 <body>
   <div id="test1" style="margin-top: 200px;">
       <button id="walk">Walk</button>
-      <button id="eat">Eat</button>
+      <button id="eat" ext:qtitle="吃货标题" ext:qtip='<b><i>提示的内容</i></b><p>下一行内容</p>'>Eat</button>
       <button id="sleep">Sleep</button>
   </div>
   <div id="test2"></div>
