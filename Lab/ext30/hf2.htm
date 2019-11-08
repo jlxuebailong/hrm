@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>深入浅出Ext Js</title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
+   <style type="text/css">
+        
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+
+            
+            Ext.apply(Ext.QuickTips, {
+                maxWidth: 200,
+                minWidth: 100,
+                showDelay: 50,
+                dismissDelay: 1000,
+                hideDelay: 500,
+                trackMouse: true,
+                animate: true
+
+            });
+            Ext.QuickTips.init();
+
+            Ext.QuickTips.register({
+                target: 'walk',
+                title: '走啊走',
+                text: 'CaCa走去哪里也不知道！',
+                trackMouse: true,
+                animate: true,
+                autoHide: false
+            });
+
+            //Ext.Msg.alert('hello', 'world');
+            Person = function(name){
+                this.name = name;
+                this.addEvents('walk', 'eat', 'sleep');
+            }
+            Ext.extend(Person, Ext.util.Observable, {
+                info: function(event){
+                    return this.name + ' is ' + event + 'ing.';
+                }
+            });
+
+            var person = new Person('caca');
+            person.on('walk', function(){
+                Ext.Msg.alert('event', person.name + '在走啊走啊。');
+            });
+            person.on('eat', function(breakfast, lunch, supper){
+                Ext.Msg.alert('event', person.name + '要吃' + breakfast + ', ' + lunch + '和' + supper + '。');
+            });
+            person.on('sleep', function(time){
+                alert(person.name + '从' + time.format('H') + '点开始睡觉。');
+                console.log('event', person.name + '从' + time.format('H') + '点开始睡觉。');
+            });
+            person.on('sleep', function(){
+                alert(person.name + '再睡一会儿。');
+                console.log('event', person.name + '要再睡一会儿。');
+            });
+
+
+            Ext.get('walk').on('click', 
+                function(e, el, args){
+                    person.fireEvent('walk');
+                    console.log(args.testId);
+                }, 
+                this,           //执行范围
+                {
+                    single: true,//只触发执行1次
+                    buffer: 1000,//延迟1秒触发，并且不重复执行；同delay功能相同
+                    testId: 4    //自定义参数
+                }
+            );
+
+            //给person对象注册事件拦截器，所有的事件在触发前都先执行拦截器的代码，如果返回true,则继续执行注册事件； 
+            //如果返回false则不执行注册事件。
+             Ext.util.Observable.capture(person, function(){
+                        console.log('capture this click');
+                        return true;
+                    })
+             //或在点击时延迟再注册拦截器
+            /*Ext.get('walk').on('click', 
+                function(){
+                    Ext.util.Observable.capture(person, function(){
+                        console.log('capture this click');
+                        return true;
+                    })
+                }
+            );*/
+
+            Ext.get('eat').on('click', function(){
+                person.fireEvent('eat', '早餐', '中餐', '晚餐');
+            });
+            Ext.get('sleep').on('click', function(){
+                person.fireEvent('sleep', new Date());
+            });
+           
+            var box = new Ext.BoxComponent({
+                el: 'test2',
+                style: 'background-color:red; position:absolute;',
+                pageX: 100,
+                pageY: 250,
+                width: 200,
+                height: 150
+            });
+            box.render();
+
+            var panel = new Ext.Panel({
+                el: 'test3',
+                title: '社会主义好',
+                floating: true,
+                shadow: true,
+                draggable: true,
+                collapsible: true,
+                html: '儿子穿衣服',
+                pageX: 100,
+                pageY: 50,
+                width: 200,
+                height: 150
+            });
+            panel.render();
+
+            var tabs = new Ext.TabPanel({
+                el: 'test4',
+                floating: true,
+                shadow: false,
+                pageX: 100,
+                pageY: 450,
+                width: 200,
+                height: 150,
+            });
+            tabs.add({
+                title: '标题1',
+                html: '内容1'
+            });
+            tabs.add({
+                title: '标题2',
+                html: '内容2',
+                closable: true
+            });
+            tabs.render();
+            tabs.activate(0);
+
+            var btns = Ext.select('div button');
+            console.log(btns);
+            btns.each(function(b){
+                b.setStyle('width', '100px');
+                b.setStyle('background-color', '#f0f0f0');
+                console.log(b);
+            })
+
+        });
+    </script>
+
+</head>
+<body>
+  <div id="test1" style="margin-top: 200px;">
+      <button id="walk">Walk</button>
+      <button id="eat" ext:qtitle="吃货标题" ext:qtip='<b><i>提示的内容</i></b><p>下一行内容</p>'>Eat</button>
+      <button id="sleep">Sleep</button>
+  </div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+  <div id="test4"></div>
+</body>
+</html>

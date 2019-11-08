@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+   
+    <script type="text/javascript">
+        
+    	window.onload = function(){
+            /*var win = new Ext.Window({
+                id:'dd',
+                title:'CaCa',
+                xtype:'window',
+                width: 800,
+                height: 600,
+                renderTo: Ext.getBody()
+            });
+
+            //win.show();*/
+
+
+            var menu = new Ext.menu.Menu();
+            menu.addText('menu1');
+            menu.addText('menu2');
+
+            var menusub1 = new Ext.menu.Menu();
+            menusub1.addItem(new Ext.menu.Item({id:'11',itemId:'item11',text:'fLabel11'}));
+            menusub1.addItem(new Ext.menu.Item({id:'12',itemId:'item12',text:'fLabel12'}));
+
+            menu.addItem(new Ext.menu.CheckItem({id:'1',itemId:'item1',text:'fLabel1'}));
+            menu.addItem(new Ext.menu.CheckItem({id:'2',itemId:'item2',text:'fLabel2'}));
+            menu.addItem(new Ext.menu.Item({id:'3',itemId:'item3',text:'fLabel3'}));
+            menu.addItem(new Ext.menu.Item({id:'4',itemId:'item4',text:'fLabel4',menu: menusub1}));
+            var btn1 = Ext.get('btn1');
+            var btn2 = Ext.get('btn2');
+            btn1.on('mouseover',function(){
+                console.log(1);
+                menu.show(this);
+            });
+            btn2.on('mouseover',function(){
+                console.log(2);
+                menu.show(this);
+            });
+            
+            menu.on('show',function(menu) {  
+                var items = menu.find();
+                console.log('menushow',items);
+                /*var menuEl = menu.getEl();  
+                var shim = createShim({  
+                    top:menuEl.getY(),  
+                    left:menuEl.getX(),  
+                    width:menuEl.getWidth(),  
+                    height:menuEl.getHeight()  
+                }); 
+                //shim.show();
+                //shim.setVisible(true, true);
+                */
+             });
+             /*menu.on('hide',function(menu) {  
+                    var shimmer = document.getElementById('shimmer')  
+                    document.body.removeChild(shimmer);  
+            });  
+
+             function createShim(coordinate) {  
+                    var shimmer = document.createElement('iframe');  
+                    shimmer.id='shimmer';  
+                    shimmer.style.position='absolute';  
+                    shimmer.style.top=coordinate.top;  
+                    shimmer.style.left=coordinate.left;  
+                    shimmer.style.width=coordinate.width;  
+                    shimmer.style.height=coordinate.height;  
+                    shimmer.style.zIndex='15000';  
+                    shimmer.setAttribute('frameborder','1');  
+                    shimmer.setAttribute('src','javascript:false;');  
+                    document.body.appendChild(shimmer);  
+                    shimmer.innerhtml='<div>sss</div>';
+                    return Ext.get(shimmer.id);
+            }   */
+
+            new Ext.Panel({
+                renderTo: 'p1',
+                title: 'Panel 组件部分示例',
+                width: 300,
+                height: 200,
+                html: 'Panel Body Area',
+                tools: [{id: 'minimize'}, {id: 'restore'}, {id: 'close'}],
+                tbar: [{text: 'button1'}, {text: 'button2'}],
+                bbar: [{text: 'button3'}, {text: 'button4'}],
+                buttons: [{text: 'button5'}, {text: 'button6'}]
+            });
+
+            Ext.Msg.alert('祖国您好', '我和我的祖国， 我爱我的祖国');
+        }
+    </script>
+</head>
+<body>
+    <div style="background: #f0f0f0; position: absolute; margin-top: 50px">
+        <div style="background: #333;position: absolute; z-index: 15000">应该在最上面</div>
+        <select id="s1"><option>应该在最下面</option></select>
+    </div>
+    <div style="background: #f0f0f0; position: absolute; margin-top: 80px">
+         <p> 
+            <a  href="javascript:;" id="btn1">用户管理</a>&nbsp;
+            <a href="javascript:;" id="btn2">房间管理</a>
+        </p>
+    </div>
+    <div style="position: absolute; margin-top: 110px" id="p1">
+    </div>
+
+</body>
+</html>

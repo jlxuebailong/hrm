@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>深入浅出Ext Js</title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
+   <style type="text/css">
+        
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+           
+           var data = {id: 123, name: 'CaCa'};
+           var encodedData = Ext.encode(data);
+           console.log(typeof encodedData, encodedData);
+           var urlEncodedData = Ext.urlEncode(data);
+           console.log(typeof urlEncodedData, urlEncodedData);
+           var encodedURIData = encodeURIComponent(encodedData);
+           console.log(typeof encodedURIData, encodedURIData);
+
+           var arr = [1,2,3,4];
+           var sum = 0;
+           Ext.each(arr, function(item){
+                sum += item;
+           });
+           console.log(sum);
+
+           App = {
+            sum: 0,
+            fn: function(item){
+                this.sum += item;
+            }
+           }
+           Ext.each(arr, App.fn, App);
+           console.log(App.sum);
+
+           var dd = [
+            ['1', 'male', 'name1', 'desc1fffffffffffffffffffffffffff'],
+            ['2', 'female', 'name2', 'desc2'],
+            ['3', 'female', 'name3', 'desc3']
+           ];
+           console.log(dd);
+           var temp = new Ext.Template('<p>'
+                +'<span>{0}</span>|'
+                +'<span>{1:this.renderSex}</span>|'
+                +'<span>{2:trim}</span>|'
+                +'<span>{3:ellipsis(10)}</span>'
+            +'</p>');
+            
+            temp.renderSex=function(value){
+                if(value==='male'){
+                    return '<span style="color:red;font-weight:bold">红男</span>';
+                }else{
+                    return '<span style="color:green;font-weight:bold">绿女</span>';
+                }
+            }
+            temp.compile();
+            for(var i=0; i<dd.length; i++){
+                temp.append('test1', dd[i]);
+            }
+
+
+            var mgr = Ext.get('test2').getUpdater();
+            mgr.update({
+                    url: "/Server/Lab/Company.php",
+                    params: {
+                        method: "query",
+                        param2: "bar"
+                    }
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+  <div id="test1" style="margin-top: 200px;"></div>
+  <div id="test2" style="margin-top: 100px"></div>
+ 
+</body>
+</html>

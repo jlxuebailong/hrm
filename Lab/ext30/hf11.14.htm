@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>深入浅出Ext Js</title>
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/Ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="/Ext/ext-all.js"></script>
+    <script type="text/javascript" src="/Ext/src/locale/ext-lang-zh_CN.js"></script>
+
+   <style type="text/css">
+        
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+             
+            var metrics = Ext.util.TextMetrics.createInstance('test1');
+            var size = metrics.getSize('www.family168.com');
+            Ext.getDom('result').innerHTML += size.width + ', ' + size.height;
+
+            var keyNav = new Ext.KeyNav(Ext.get('text1'), {
+                left: function(){
+                    if(this.el.getWidth() > 10){
+                        this.el.setWidth(this.el.getWidth() - 10);
+                    }
+                },
+                right: function(){
+                    if(this.el.getWidth() < 700){
+                        this.el.setWidth(this.el.getWidth() + 10);
+                    }
+                },
+                down: function(){
+                    if(this.el.getHeight() < 500){
+                        this.el.setHeight(this.el.getHeight() + 10);
+                    }
+                },
+                up: function(){
+                    if(this.el.getHeight() > 10){
+                        this.el.setHeight(this.el.getHeight() - 10);
+                    }
+                }
+            });
+
+            var keyMap = new Ext.KeyMap('text1', {
+                key: 'abcd',
+                fn: function(e){
+                    keyMap.el.setStyle('backgroundColor', 'red');
+                    var fn = function(){
+                        keyMap.el.setStyle('backgroundColor', 'white');
+                    }
+                    fn.defer(1000);
+                }
+            });
+
+            var sayHi = function(name){
+                alert('Hi ' + name);
+            }
+            new Ext.Button({
+                text: 'Say Hi',
+                renderTo: 'btn1',
+                handler: sayHi.createCallback('Fred')
+            });
+        });
+    </script>
+
+</head>
+<body>
+  <div id="test1" style="margin-top: 200px;"></div>
+  <div id="result" style="margin-top: 50px;"></div>
+  <div id="result" style="margin-top: 50px;">
+      <textarea id="text1">CaCa</textarea>
+  </div>
+  <div id="btn1" style="margin-top: 50px;">
+  </div>
+</body>
+</html>
