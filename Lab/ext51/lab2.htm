@@ -65,7 +65,7 @@
                 extend : "Ext.panel.Panel",
                 alias : "widget.p2gridview",
                 //displayMsg : "{0}-{1} of {2}",
-                displayMsg : "{0}-{1} "+'SysConfig.gvDisplayMsg'+" {2}",
+                displayMsg : "{0}-{1} "+'Total'+" {2}",
                 emptyMsg : "No data",
                 //layout: 'fit',
                 rowCount : 0,
@@ -192,20 +192,25 @@
                             beforerender:function(){
                                 var selectCol = this.columns[this.columns.length - 1];
                                 var first=1;
+                                console.log(' selectCol.dataIndex: ', selectCol.dataIndex);
                                 if ("multichecker" == selectCol.dataIndex) {
                                     var multicheckerBestWidth=40;
-                                    var parentWidth = this.parentWidth;
+                                    var parentWidth = this.parentWidth; 
                                     var last= multicheckerBestWidth/parentWidth;
+
                                     this.columns[this.columns.length - 1].width = last;
+                                  
                                     for(var i=1,j=this.columns.length-1;i<j;i++){
                                         first-=this.columns[i].width;
                                     }
                                     this.columns[0].width = first-last;
                                 }else{
                                     for(var i=1,j=this.columns.length;i<j;i++){
+                                        console.log(first, '-', this.columns[i].width, '=', first);
                                         first-=this.columns[i].width;
                                     }
                                     this.columns[0].width = first;
+                                    console.log('this.columns[0].width: ', this.columns[0].width);
                                 }
                             },
                             afterrender:function(src){
@@ -461,8 +466,8 @@
                             editable:true,
                             width:246,
                             labelWidth:100,
-                            value : "INVALID BINDING",
-                            oldvalue : "INVALID BINDING",
+                            value : "大耳朵图图",
+                            oldvalue : "小耳朵图图",
                             enableKeyEvents :true,
                             selectOnFocus : false,
                             listeners : {
@@ -536,54 +541,54 @@
                         
                         scope : this,
                         columns: [
-                        {
-                            dataIndex : "demo01_gridcol_9",
-                            sortable :true,
-                            menuDisabled : true,
-                            header:"Code"
-                        },
-                        {
-                            dataIndex : "demo01_gridcol_10",
-                            sortable :true,
-                            menuDisabled : true,
-                            width:0.14285714285714285,
-                            header:"Name"
-                        },
-                        {
-                            dataIndex : "demo01_gridcol_11",
-                            sortable :true,
-                            menuDisabled : true,
-                            width:0.14285714285714285,
-                            header:"Name"
-                        },
-                        {
-                            dataIndex : "demo01_gridcol_12",
-                            sortable :true,
-                            menuDisabled : true,
-                            width:0.14285714285714285,
-                            header:"Name"
-                        },
-                        {
-                            dataIndex : "demo01_gridcol_13",
-                            sortable :true,
-                            menuDisabled : true,
-                            width:0.14285714285714285,
-                            header:"Name"
-                        },
-                        {
-                            dataIndex : "demo01_gridcol_14",
-                            sortable :true,
-                            menuDisabled : true,
-                            width:0.14285714285714285,
-                            header:"Name"
-                        },
-                        {
-                            dataIndex : "demo01_gridcol_15",
-                            sortable :true,
-                            menuDisabled : true,
-                            width:0.14285714285714285,
-                            header:"Name"
-                        }
+                            {
+                                dataIndex : "demo01_gridcol_9",
+                                sortable :true,
+                                menuDisabled : true,
+                                header:"Code"
+                            },
+                            {
+                                dataIndex : "demo01_gridcol_10",
+                                sortable :true,
+                                menuDisabled : true,
+                                width:0.100,
+                                header:"Name"
+                            },
+                            {
+                                dataIndex : "demo01_gridcol_11",
+                                sortable :true,
+                                menuDisabled : true,
+                                width:0.14285714285714285,
+                                header:"Name"
+                            },
+                            {
+                                dataIndex : "demo01_gridcol_12",
+                                sortable :true,
+                                menuDisabled : true,
+                                width:0.14285714285714285,
+                                header:"Name"
+                            },
+                            {
+                                dataIndex : "demo01_gridcol_13",
+                                sortable :true,
+                                menuDisabled : true,
+                                width:0.14285714285714285,
+                                header:"Name"
+                            },
+                            {
+                                dataIndex : "demo01_gridcol_14",
+                                sortable :true,
+                                menuDisabled : true,
+                                width:0.14285714285714285,
+                                header:"Name"
+                            },
+                            {
+                                dataIndex : "demo01_gridcol_15",
+                                sortable :true,
+                                menuDisabled : true,
+                                width:0.14285714285714285,
+                                header:"Last"
+                            }
                         ],                 
 
                         store: new Ext.data.JsonStore({
@@ -592,15 +597,14 @@
                                     root: 'rows',
                                     totalProperty: 'totalCount',
                                     idProperty: 'threadid',	
-                            
                                     fields : [
-                                    {name:'demo01_gridcol_9'},
-                                    {name:'demo01_gridcol_10'},
-                                    {name:'demo01_gridcol_11'},
-                                    {name:'demo01_gridcol_12'},
-                                    {name:'demo01_gridcol_13'},
-                                    {name:'demo01_gridcol_14'},
-                                    {name:'demo01_gridcol_15'},
+                                        {name:'demo01_gridcol_9'},
+                                        {name:'demo01_gridcol_10'},
+                                        {name:'demo01_gridcol_11'},
+                                        {name:'demo01_gridcol_12'},
+                                        {name:'demo01_gridcol_13'},
+                                        {name:'demo01_gridcol_14'},
+                                        {name:'demo01_gridcol_15'},
                                         'rowStatus',
                                         'toggleSelected',
                                         'sortClassFlag',
@@ -618,7 +622,6 @@
                                         "totalCount":1,
                                         "rows":[
                                         {
-                                        
                                         "demo01_gridcol_9":"<div onclick=\"console.log('444666')\"><a href='javascript:;'>4444666</a></div>",
                                         "demo01_gridcol_10": "222222333333",
                                         "demo01_gridcol_11":"222222333333",
@@ -640,25 +643,20 @@
                                     },
                                     remoteSort: false
                                 })
-
-                    }
-                    /*,
+                    },
                     {  // Let's put an empty grid in just to illustrate fit layout
-                    
-
-                    
                     title: 'Simpsons',
                     xtype: 'grid',
                     border: false,
                     columns: [
-                        { text: 'Name', dataIndex: 'name'  },
-                        { text: 'Email', dataIndex: 'email', flex: 1  },
-                        { text: 'Phone', dataIndex: 'phone'  }
+                        { text: 'Name', dataIndex: 'name', width: 150  },
+                        { text: 'Email', dataIndex: 'email', width: 700 },
+                        { text: 'Phone', dataIndex: 'phone', width: 700  }
                     ],                 
                     // One header just for show. There's no data,
                     //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
                     store: Ext.data.StoreManager.lookup('simpsonsStore')
-                    }*/
+                    }
                 ]
             }).show();
 
