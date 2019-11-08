@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/neptune/ext-theme-neptune-all-debug.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
+
+   <style type="text/css">
+   </style>
+    <script type="text/javascript">
+        Ext.onReady(function(){
+            Ext.create('Ext.data.Store', {
+                storeId: 'simpsonsStore',
+                fields:[ 'name', 'email', 'phone'],
+                data: [
+                    { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+                    { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+                    { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+                    { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+                ]
+            });
+
+            Ext.create('Ext.grid.Panel', {
+                title: 'Simpsons',
+                store: Ext.data.StoreManager.lookup('simpsonsStore'),
+                columns: [
+                    { text: 'Name', dataIndex: 'name',width: 100 },
+                    { text: 'Email', dataIndex: 'email', flex: 1 },
+                    { text: 'Phone', dataIndex: 'phone' }
+                ],
+                height: 200,
+                width: 400,
+                renderTo: Ext.getBody()
+            });
+
+         });
+
+         
+
+       
+    </script>
+
+</head>
+<body>
+
+  
+
+</body>
+</html>
