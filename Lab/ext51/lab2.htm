@@ -42,6 +42,25 @@
                 renderTo: Ext.getBody()
             });
 
+            function refreshRowColor(json, view) {
+                var len = json["end"] - json["start"] + 1;
+                for (var i = 0; i < len; i++) {
+                    var rowData = json.rows[i];
+                    var rowIndex = rowData["rowIndex"];
+                    var rowColor = rowData["rowColor"];
+                    if (typeof(view.getEl()) != "undefined") {
+                        if(typeof(view.getEl().dom.childNodes[1].childNodes[0].childNodes[0]) != "undefined"){
+                            var selectedRow = view.getEl().dom.childNodes[1].childNodes[0].childNodes[0].childNodes[rowIndex];
+                            if (typeof(selectedRow) != "undefined") {
+                                if (rowColor != "null") {
+                                    selectedRow.style.color = rowColor;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             Ext.define("Ext.p2.grid.GridView", {
                 extend : "Ext.panel.Panel",
                 alias : "widget.p2gridview",
@@ -243,6 +262,31 @@
                 /* 读取数据 */
                 loadData : function(json, fn) {
                     console.log('loadData event');
+                    
+                    //return;
+                    if (json) {
+                        this.store.loadData(json.rows, false);
+                        if (fn && Ext.isFunction(fn)){
+                            fn();
+                        }	
+                        this.updateInfo(json);
+                        refreshRowColor(json, this.view);
+                        this.fireEvent("datareload", this, this.store, json);
+                    }
+                    /* Dialog关闭与打开会触发loadData 此时让其过滤器聚焦 */
+                    if (this.isAutoFocus) {
+                        this.fireEvent("focusfilter", this);
+                    }
+                    // 有滚动条时，增加高度
+                    if (this.autoScroll) {
+                        if (this.view.rendered) {
+                            // 表格高度(列标题行及记录行)+100
+                            if (Ext.isIE) {
+                                this.setHeight(this.view.el.getHeight() + 100);
+                            }
+                        }
+                    }
+	
                 },
                 /* 刷新数据 */
                 refreshData : function(json, fn) {
@@ -492,13 +536,110 @@
                         
                         scope : this,
                         columns: [
-                            { text: 'Name', dataIndex: 'name' },
-                            { text: 'Email', dataIndex: 'email', flex: 1 },
-                            { text: 'Phone', dataIndex: 'phone' }
+                        {
+                            dataIndex : "demo01_gridcol_9",
+                            sortable :true,
+                            menuDisabled : true,
+                            header:"Code"
+                        },
+                        {
+                            dataIndex : "demo01_gridcol_10",
+                            sortable :true,
+                            menuDisabled : true,
+                            width:0.14285714285714285,
+                            header:"Name"
+                        },
+                        {
+                            dataIndex : "demo01_gridcol_11",
+                            sortable :true,
+                            menuDisabled : true,
+                            width:0.14285714285714285,
+                            header:"Name"
+                        },
+                        {
+                            dataIndex : "demo01_gridcol_12",
+                            sortable :true,
+                            menuDisabled : true,
+                            width:0.14285714285714285,
+                            header:"Name"
+                        },
+                        {
+                            dataIndex : "demo01_gridcol_13",
+                            sortable :true,
+                            menuDisabled : true,
+                            width:0.14285714285714285,
+                            header:"Name"
+                        },
+                        {
+                            dataIndex : "demo01_gridcol_14",
+                            sortable :true,
+                            menuDisabled : true,
+                            width:0.14285714285714285,
+                            header:"Name"
+                        },
+                        {
+                            dataIndex : "demo01_gridcol_15",
+                            sortable :true,
+                            menuDisabled : true,
+                            width:0.14285714285714285,
+                            header:"Name"
+                        }
                         ],                 
-                        // One header just for show. There's no data,
-                        //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
-                        store: Ext.data.StoreManager.lookup('simpsonsStore')
+
+                        store: new Ext.data.JsonStore({
+                                    ownerId : 'demo01_demo01_grid_2',
+                                    autoLoadData : true,
+                                    root: 'rows',
+                                    totalProperty: 'totalCount',
+                                    idProperty: 'threadid',	
+                            
+                                    fields : [
+                                    {name:'demo01_gridcol_9'},
+                                    {name:'demo01_gridcol_10'},
+                                    {name:'demo01_gridcol_11'},
+                                    {name:'demo01_gridcol_12'},
+                                    {name:'demo01_gridcol_13'},
+                                    {name:'demo01_gridcol_14'},
+                                    {name:'demo01_gridcol_15'},
+                                        'rowStatus',
+                                        'toggleSelected',
+                                        'sortClassFlag',
+                                        'row',
+                                        'rowIndex'
+                                    ],	
+
+                                    json : 
+                                    {
+                                        "atFirstPage" : true,
+                                        "atLastPage" : true,
+                                        "start" : 1,
+                                        "end" : 1,
+                                        "selectedRowIndex" : 0,
+                                        "totalCount":1,
+                                        "rows":[
+                                        {
+                                        
+                                        "demo01_gridcol_9":"<div onclick=\"console.log('444666')\"><a href='javascript:;'>4444666</a></div>",
+                                        "demo01_gridcol_10": "222222333333",
+                                        "demo01_gridcol_11":"222222333333",
+                                        "demo01_gridcol_12":"222222333333",
+                                        "demo01_gridcol_13":"222222333333",
+                                        "demo01_gridcol_14":"222222333333",
+                                        "demo01_gridcol_15":"222222333333",
+                                        "action" : "<div></div>",	
+                                        "toggleSelected" : false,
+                                        "rowColor":"null",
+                                        "rowStatus":2,
+                                        "sortClassFlag":0,
+                                        "row":0,
+                                        "rowIndex":0
+                                        }
+                                    
+                                        ],
+                                        "toggleSelectedAll" : false
+                                    },
+                                    remoteSort: false
+                                })
 
                     }
                     /*,
