@@ -39,7 +39,20 @@
                 ],
                 height: 200,
                 width: 400,
-                renderTo: Ext.getBody()
+                renderTo: Ext.getBody(),
+                fbar : ['->',	
+                    {
+                    xtype : "button",
+                    text : "显示包含表格的窗口",
+                    disabled : false,
+                    handler : function(src) {
+                        var win = Ext.getCmp('gridWin');
+                        if(win.hidden){
+                            win.show();
+                        }
+                    },
+                    }
+                ]
             });
 
             function refreshRowColor(json, view) {
@@ -157,6 +170,8 @@
                         }
                     }
                     
+                    this.height = this.parentHeight;
+
                     me.callParent();
                     /* 生成一个构造函数，该函数能产生符合规定的Record对象 */
                     this.RowRecordClazz = Ext.data.Model.create(this.store.fields);
@@ -409,9 +424,12 @@
             });
 
             Ext.create('Ext.window.Window', {
+                id: 'gridWin',
                 title: 'Hello',
-                height: 400,
+                height: 500,
                 width: 600,
+                closeAction: 'hide',
+                //scrollable: true,
                 //layout: 'fit',
                 modal : true,
                 fbar : ['->',	
@@ -531,8 +549,9 @@
                         buttonAlign:'center',	
                         clicksToEdit: 1,
                         columnSort : true,
-                    
                         parentWidth:350.0,
+                        parentHeight:170,
+                        width:600.0,
                         isfilter : true,
                         isShowFilter : false,
                         listeners : {
@@ -551,7 +570,7 @@
                                 dataIndex : "demo01_gridcol_10",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.100,
+                                width:0.14285714285714285,
                                 header:"Name"
                             },
                             {
@@ -644,19 +663,33 @@
                                     remoteSort: false
                                 })
                     },
-                    {  // Let's put an empty grid in just to illustrate fit layout
-                    title: 'Simpsons',
-                    xtype: 'grid',
-                    border: false,
-                    columns: [
-                        { text: 'Name', dataIndex: 'name', width: 150  },
-                        { text: 'Email', dataIndex: 'email', width: 700 },
-                        { text: 'Phone', dataIndex: 'phone', width: 700  }
-                    ],                 
-                    // One header just for show. There's no data,
-                    //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
-                    store: Ext.data.StoreManager.lookup('simpsonsStore')
+                    {
+                        title: '',
+                        width: 600,
+                        height: 400,
+                        tbar: [
+                            { xtype: 'button', text: 'Search' },
+                            { xtype: 'button', text: 'Restsearch' }
+                        ],
+                        items: [
+                            {  // Let's put an empty grid in just to illustrate fit layout
+                            title: '',
+                            xtype: 'grid',
+                            border: false,
+                            //width: 600,
+                            bodyStyle: 'overflow-x:hidden; overflow-y:hidden',
+                            columns: [
+                                { text: 'Name', dataIndex: 'name', width: 150  },
+                                { text: 'Email', dataIndex: 'email',flex:0, width: 700 },
+                                { text: 'Phone', dataIndex: 'phone', width: 700  }
+                            ],                 
+                            // One header just for show. There's no data,
+                            //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
+                            store: Ext.data.StoreManager.lookup('simpsonsStore')
+                            }
+                        ]
                     }
+                    
                 ]
             }).show();
 
@@ -669,8 +702,6 @@
 
 </head>
 <body>
-
-  
 
 </body>
 </html>
