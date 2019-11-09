@@ -84,6 +84,7 @@
                 rowCount : 0,
                 loaddelay : 0,
                 allowSort : true,
+                scrollable: true,
                 // 是否需要自动聚焦功能
                 isAutoFocus : false,
                 isFirst:true,//fire_add
@@ -192,7 +193,7 @@
                         parentWidth : this.parentWidth,
                         owner : this,
                         currentIndex : 0,
-                        scrollable:false,//fire_add
+                        scrollable:true,//fire_add
                         forceFit: true,
                         listeners : { 
                             rowclick:function( src, record, tr, rowIndex, e, eOpts){
@@ -204,7 +205,8 @@
                                 this.currentIndex = rowIndex;
                                 gridContainer.handleClick(this,record.data.row,false);
                             },
-                            beforerender:function(){
+                            //这个事件监听处理器导致grid的column的宽度列变成了百分比，所以导致横向滚动条消息
+                            beforerender_error:function(){
                                 var selectCol = this.columns[this.columns.length - 1];
                                 var first=1;
                                 console.log(' selectCol.dataIndex: ', selectCol.dataIndex);
@@ -251,6 +253,7 @@
                             }
                         }
                     };
+
                     this.view = Ext.create('Ext.grid.Panel', gridConfig);
                     this.messagePanel=Ext.create('Ext.form.Label');
                     this.add(this.view);
@@ -525,7 +528,7 @@
                         ui:"light",
                         cls:"p2-panel",	
                         title:"p2gridview",
-                        collapsible :false,
+                        collapsible :true,
                         collapsed : false,	
                         xtype : "p2gridview",
                         refreshText :"搜索",
@@ -549,9 +552,8 @@
                         buttonAlign:'center',	
                         clicksToEdit: 1,
                         columnSort : true,
-                        parentWidth:350.0,
-                        parentHeight:170,
-                        width:600.0,
+                        parentWidth: 550.0,
+                        parentHeight: 170,
                         isfilter : true,
                         isShowFilter : false,
                         listeners : {
@@ -564,48 +566,49 @@
                                 dataIndex : "demo01_gridcol_9",
                                 sortable :true,
                                 menuDisabled : true,
+                                width: 100,
                                 header:"Code"
                             },
                             {
                                 dataIndex : "demo01_gridcol_10",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.14285714285714285,
+                                width:200,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_11",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.14285714285714285,
+                                width:300,//0.14285714285714285,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_12",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.14285714285714285,
+                                width:100,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_13",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.14285714285714285,
+                                width:100,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_14",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.14285714285714285,
+                                width:100,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_15",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:0.14285714285714285,
+                                width:100,
                                 header:"Last"
                             }
                         ],                 
