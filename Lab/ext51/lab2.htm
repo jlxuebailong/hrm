@@ -206,7 +206,7 @@
                                 gridContainer.handleClick(this,record.data.row,false);
                             },
                             //这个事件监听处理器导致grid的column的宽度列变成了百分比，所以导致横向滚动条消息
-                            beforerender_error:function(){
+                            beforerender:function(){
                                 var selectCol = this.columns[this.columns.length - 1];
                                 var first=1;
                                 console.log(' selectCol.dataIndex: ', selectCol.dataIndex);
@@ -215,18 +215,18 @@
                                     var parentWidth = this.parentWidth; 
                                     var last= multicheckerBestWidth/parentWidth;
 
-                                    this.columns[this.columns.length - 1].width = last;
+                                    //this.columns[this.columns.length - 1].width = last;
                                   
                                     for(var i=1,j=this.columns.length-1;i<j;i++){
                                         first-=this.columns[i].width;
                                     }
-                                    this.columns[0].width = first-last;
+                                    //this.columns[0].width = first-last;
                                 }else{
                                     for(var i=1,j=this.columns.length;i<j;i++){
                                         console.log(first, '-', this.columns[i].width, '=', first);
                                         first-=this.columns[i].width;
                                     }
-                                    this.columns[0].width = first;
+                                    //this.columns[0].width = first;
                                     console.log('this.columns[0].width: ', this.columns[0].width);
                                 }
                             },
