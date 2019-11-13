@@ -50,6 +50,7 @@
 			isAutoFocus : false,
 			hideTbar:false,
 			showToolTip:false,
+			autoScroll: true,
 			/* 初始化 */
 			initComponent : function() {
 				var a = Ext.Toolbar;
@@ -148,6 +149,8 @@
 					isSetGridColWidth: this.isSetGridColWidth,
 					owner : this,
 					currentIndex : 0,
+					autoWidth: true,
+					autoScroll: true,
 					listeners : {
 						/*
 						 * 当行记录被单击时执行选中操作
@@ -167,7 +170,7 @@
 						},
 						beforerender : function(src) {
 							//if(this.isSetGridColWidth) return;
-							src.resizeSelectCol();
+							//src.resizeSelectCol();
 						},
 						afterrender : function(src) {
 							// 有滚动条时，增加高度
@@ -227,6 +230,7 @@
 					}
 				};
 				if (this.gridWidth) {
+					console.log('gridWidth', this.gridWidth);
 					Ext.apply(gridConfig, {
 								width : this.gridWidth
 							});
@@ -456,7 +460,7 @@
         new Ext.Panel({
             title: 'Message Title',
             renderTo: Ext.getBody(),
-            width: 900, height: 730,
+            width: 190, height: 730,
             items: [
                 {
                     id : "designer_CONDITION_lookupdef",
@@ -464,7 +468,7 @@
                     appid:'designer',
                     controltype:"grid",
                     parentid : "designer_",
-                    rowCount : 8,
+                    rowCount : 2,
                     title:"",
                     collapsible :false,
                     collapsed : false,	
@@ -487,53 +491,54 @@
                     showToolTip:false,
                     
                     tbar : [
-                        
                     ],
                     
                     buttonAlign:'center',	
                     clicksToEdit: 1,
                     columnSort : true,
                 
-                    parentWidth:1100.0,
-                    isSetGridColWidth:false,
+                    parentWidth:200.0,
+					isSetGridColWidth:false,
+					gridWidth: 200,
                     columns: [
                     {
                         dataIndex : "CONDITION_col0",
-                        sortable :true,
+						sortable :true,
+						width: 100,
                         header:"条件名称"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col1",
                         sortable :true,
-                        width:0.45454545454545453,
+                        width:200,//0.45454545454545453,
                         header:"描述"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col2",
                         sortable :true,
-                        width:0.09090909090909091,
+                        width:120,//0.09090909090909091,
                         header:"类型"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col3",
                         sortable :true,
-                        width:0.11363636363636363,
+                        width:120,//0.11363636363636363,
                         header:"物件名称"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col4",
                         sortable :true,
-                        width:0.22727272727272727,
+                        width:150,//0.22727272727272727,
                         header:"栏位名称"
                     }
                     ],                 
 
                     store: new Ext.data.JsonStore({
-                        ownerId : 'designer_CONDITION_lookupdef',
+                        //ownerId : 'designer_CONDITION_lookupdef',
                         autoLoadData : true,
                         root: 'rows',
                         totalProperty: 'totalCount',
@@ -564,7 +569,7 @@
                                     "CONDITION_col0":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:0,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>USER_IS_SUPERVISOR</a></div>",
                                     "CONDITION_col1":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:0,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>The user is supervisor of the current record.</a></div>",
                                     "CONDITION_col2":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:0,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>BEANFIELD</a></div>",
-                                    "CONDITION_col3":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:0,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'></a></div>",
+                                    "CONDITION_col3":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:0,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>Fuck</a></div>",
                                     "CONDITION_col4":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:0,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>SUPERVISOR</a></div>",
                                     "action" : "<div></div>",
                                     "toggleSelected" : false,
@@ -579,7 +584,7 @@
                                     "CONDITION_col0":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:1,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>USER_IS_CREATOR</a></div>",
                                     "CONDITION_col1":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:1,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>The user is the creator of the current record.</a></div>",
                                     "CONDITION_col2":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:1,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>BEANFIELD</a></div>",
-                                    "CONDITION_col3":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:1,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'></a></div>",
+                                    "CONDITION_col3":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:1,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>CaCa</a></div>",
                                     "CONDITION_col4":"<div onclick=\"console.log({event:'selectrecord',appid:'designer',row:1,targetid:'CONDITION_lookupdef',value:\&quot;true\&quot;})\"><a href='#'>CREATEBY</a></div>",
                                     "action" : "<div></div>",
                                     "toggleSelected" : false,
@@ -599,13 +604,89 @@
                 }
             ],
             footerCfg: {
-                tag: 'h2',
+                tag: 'marquee',
                 cls: 'x-panel-footer',        // same as the Default class
-                html: 'footer html'
+                html: 'Fucccccc......'
             },
             footerCssClass: 'custom-footer', // additional css class, see {@link Ext.element#addClass addClass}
-            footerStyle:    'background-color:red' // see {@link #bodyStyle}
-        });
+            footerStyle:    'background-color:#C8303D' //#CEBDB5 see {@link #bodyStyle}
+		});
+		
+
+		
+		var data = {
+			"images":[
+				{
+					"name":"dance_fever.jpg",
+					"size":2067,
+					"lastmod":1236974993000,
+					"url":"images\/thumbs\/dance_fever.jpg"
+				},
+				{
+					"name":"zack_sink.jpg",
+					"size":2303,
+					"lastmod":1236974993000,
+					"url":"images\/thumbs\/zack_sink.jpg"
+				}
+			]
+		}
+		var store = new Ext.data.JsonStore({
+			url: 'get-images.php',
+			root: 'images',
+			fields: [
+				'name', 'url',
+				{name:'size', type: 'float'},
+				{name:'lastmod', type:'date', dateFormat:'timestamp'}
+			]
+		});
+
+		store.loadData(data);
+
+		var listView = new Ext.list.ListView({
+			store: store,
+			multiSelect: true,
+			emptyText: 'No images to display',
+			reserveScrollOffset: true,
+			width: 500,
+			//autoScroll: true,
+			columns: [{
+				header: 'File',
+				width: .15,
+				dataIndex: 'name'
+			},{
+				header: 'Last Modified',
+				width: .35,
+				dataIndex: 'lastmod',
+				tpl: '{lastmod:date("m-d h:i a")}'
+			},{
+				header: 'Size',
+				dataIndex: 'size',
+				tpl: '{size:fileSize}', // format using Ext.util.Format.fileSize()
+				align: 'right'
+			}]
+		});
+
+		// put it in a Panel so it looks pretty
+		var panel = new Ext.Panel({
+			id:'images-view',
+			width:425,
+			height:250,
+			collapsible:true,
+			layout:'form',
+			autoScroll: true,
+			title:'Simple ListView (0 items selected)',
+			items: listView
+		});
+		panel.render('grid-container');
+
+		// little bit of feedback
+		listView.on('selectionchange', function(view, nodes){
+			var l = nodes.length;
+			var s = l != 1 ? 's' : '';
+			panel.setTitle('Simple ListView ('+l+' item'+s+' selected)');
+		});
+				
+			
 
 
          });
@@ -617,6 +698,6 @@
 
 </head>
 <body>
-
+	<div id='grid-container' style='margin-left:25%;width:50%'></div>
 </body>
 </html>
