@@ -149,8 +149,6 @@
 					isSetGridColWidth: this.isSetGridColWidth,
 					owner : this,
 					currentIndex : 0,
-					autoWidth: true,
-					autoScroll: true,
 					listeners : {
 						/*
 						 * 当行记录被单击时执行选中操作
@@ -459,8 +457,10 @@
 
         new Ext.Panel({
             title: 'Message Title',
-            renderTo: Ext.getBody(),
-            width: 190, height: 730,
+            renderTo: 'gridview-container',
+			width: 425, 
+			height: 330,
+			autoScroll: true,
             items: [
                 {
                     id : "designer_CONDITION_lookupdef",
@@ -473,7 +473,6 @@
                     collapsible :false,
                     collapsed : false,	
                     xtype : "gridview",
-                    
                     refreshText :"搜索",
                     filterText:"过滤器",
                     filterable:true,
@@ -499,40 +498,40 @@
                 
                     parentWidth:200.0,
 					isSetGridColWidth:false,
-					gridWidth: 200,
+					gridWidth: 625,
                     columns: [
                     {
                         dataIndex : "CONDITION_col0",
 						sortable :true,
-						width: 100,
+						width: 0.1,
                         header:"条件名称"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col1",
                         sortable :true,
-                        width:200,//0.45454545454545453,
+                        width: 0.45454545454545453,
                         header:"描述"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col2",
                         sortable :true,
-                        width:120,//0.09090909090909091,
+                        width: 0.09090909090909091,
                         header:"类型"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col3",
                         sortable :true,
-                        width:120,//0.11363636363636363,
+                        width: 0.11363636363636363,
                         header:"物件名称"
                     }
                         ,
                     {
                         dataIndex : "CONDITION_col4",
                         sortable :true,
-                        width:150,//0.22727272727272727,
+                        width: 0.22727272727272727,
                         header:"栏位名称"
                     }
                     ],                 
@@ -647,7 +646,7 @@
 			multiSelect: true,
 			emptyText: 'No images to display',
 			reserveScrollOffset: true,
-			width: 500,
+			width: 430,
 			//autoScroll: true,
 			columns: [{
 				header: 'File',
@@ -698,6 +697,7 @@
 
 </head>
 <body>
-	<div id='grid-container' style='margin-left:25%;width:50%'></div>
+	<div id='gridview-container' style='margin-left:25%;'></div>
+	<div id='grid-container' style='margin-left:25%;margin-top: 20px;'></div>
 </body>
 </html>

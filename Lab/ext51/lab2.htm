@@ -191,6 +191,7 @@
                         isDialog:this.isDialog,
                         sortableColumns:false,//fire_add
                         parentWidth : this.parentWidth,
+                        width: this.gridWidth,
                         owner : this,
                         currentIndex : 0,
                         scrollable:true,//fire_add
@@ -215,18 +216,18 @@
                                     var parentWidth = this.parentWidth; 
                                     var last= multicheckerBestWidth/parentWidth;
 
-                                    //this.columns[this.columns.length - 1].width = last;
+                                    this.columns[this.columns.length - 1].width = last;
                                   
                                     for(var i=1,j=this.columns.length-1;i<j;i++){
                                         first-=this.columns[i].width;
                                     }
-                                    //this.columns[0].width = first-last;
+                                    this.columns[0].width = first-last;
                                 }else{
                                     for(var i=1,j=this.columns.length;i<j;i++){
                                         console.log(first, '-', this.columns[i].width, '=', first);
                                         first-=this.columns[i].width;
                                     }
-                                    //this.columns[0].width = first;
+                                    this.columns[0].width = first;
                                     console.log('this.columns[0].width: ', this.columns[0].width);
                                 }
                             },
@@ -554,6 +555,7 @@
                         columnSort : true,
                         parentWidth: 550.0,
                         parentHeight: 170,
+                        gridWidth: 600,
                         isfilter : true,
                         isShowFilter : false,
                         listeners : {
@@ -566,49 +568,49 @@
                                 dataIndex : "demo01_gridcol_9",
                                 sortable :true,
                                 menuDisabled : true,
-                                width: 100,
+                                width: 0.1,
                                 header:"Code"
                             },
                             {
                                 dataIndex : "demo01_gridcol_10",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:200,
+                                width:0.1,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_11",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:300,//0.14285714285714285,
+                                width:0.1,//0.14285714285714285,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_12",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:100,
+                                width:0.2,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_13",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:100,
+                                width:0.2,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_14",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:100,
+                                width:0.1,
                                 header:"Name"
                             },
                             {
                                 dataIndex : "demo01_gridcol_15",
                                 sortable :true,
                                 menuDisabled : true,
-                                width:100,
+                                width:0.1,
                                 header:"Last"
                             }
                         ],                 
@@ -680,11 +682,11 @@
                             xtype: 'grid',
                             border: false,
                             //width: 600,
-                            bodyStyle: 'overflow-x:hidden; overflow-y:hidden',
+                            //bodyStyle: 'overflow-x:hidden; overflow-y:hidden',
                             columns: [
-                                { text: 'Name', dataIndex: 'name', width: 150  },
-                                { text: 'Email', dataIndex: 'email',flex:0, width: 700 },
-                                { text: 'Phone', dataIndex: 'phone', width: 700  }
+                                { text: 'Name', dataIndex: 'name', width:201  },
+                                { text: 'Email', dataIndex: 'email', width: 200 },
+                                { text: 'Phone', dataIndex: 'phone', width: 200  }
                             ],                 
                             // One header just for show. There's no data,
                             //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
