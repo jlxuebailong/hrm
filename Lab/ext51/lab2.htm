@@ -191,7 +191,7 @@
                         isDialog:this.isDialog,
                         sortableColumns:false,//fire_add
                         parentWidth : this.parentWidth,
-                        width: this.gridWidth,
+                        //width: this.gridWidth,//extjs5.1不需要设置宽度也可以显示滚动条， 设置了宽度反而会有问题
                         owner : this,
                         currentIndex : 0,
                         scrollable:true,//fire_add
@@ -210,7 +210,6 @@
                             beforerender:function(){
                                 var selectCol = this.columns[this.columns.length - 1];
                                 var first=1;
-                                console.log(' selectCol.dataIndex: ', selectCol.dataIndex);
                                 if ("multichecker" == selectCol.dataIndex) {
                                     var multicheckerBestWidth=40;
                                     var parentWidth = this.parentWidth; 
@@ -224,11 +223,9 @@
                                     this.columns[0].width = first-last;
                                 }else{
                                     for(var i=1,j=this.columns.length;i<j;i++){
-                                        console.log(first, '-', this.columns[i].width, '=', first);
                                         first-=this.columns[i].width;
                                     }
                                     this.columns[0].width = first;
-                                    console.log('this.columns[0].width: ', this.columns[0].width);
                                 }
                             },
                             afterrender:function(src){
@@ -434,7 +431,7 @@
                 width: 600,
                 closeAction: 'hide',
                 //scrollable: true,
-                //layout: 'fit',
+                layout: 'fit',
                 modal : true,
                 fbar : ['->',	
                     {
@@ -467,9 +464,10 @@
                     }
                 ],
                 items: [
-                    {
+                    /*{
                     elements : 'body',
 			        border : true,
+                    height: 100,
                     id:"demo01_demo01_section_4_container",
 			        bufferResize : true,
                     items : [
@@ -516,7 +514,7 @@
                             }
                         }
                     ]
-                    },
+                    },*/
                     {
                         
                         id : "demo01_demo01_grid_2",
@@ -667,7 +665,8 @@
                                     },
                                     remoteSort: false
                                 })
-                    },
+                    }
+                    /*,
                     {
                         title: '',
                         width: 600,
@@ -693,7 +692,7 @@
                             store: Ext.data.StoreManager.lookup('simpsonsStore')
                             }
                         ]
-                    }
+                    }*/
                     
                 ]
             }).show();
