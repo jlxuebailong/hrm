@@ -1,0 +1,189 @@
+/**************************window**************************/
+.x-window-header-default {
+	font-size: 13px;
+	border-color: #FF6767;
+	background-color: #FF6767;
+}
+
+.x-window-default {
+	border-color: #FF6767;
+}
+
+.x-window-header-default .x-tool-img {
+    background-color: transparent;
+}
+/**************************toolbar**************************/
+.x-toolbar-default {
+	background-color: white;
+}
+
+/**************************tab**************************/
+.x-tab-default {
+	border-color: #F5F5F5;
+}
+
+.x-tab-default-top {
+	background-color: #F5F5F5;
+}
+
+.x-tab-over.x-tab-default {
+	border-color: #EEF6FB;
+	background-color: #EEF6FB;
+}
+
+.x-tab-bar-default {
+	background-color: #F5F5F5;
+}
+
+.x-tab-bar-strip-default {
+	border-color: #FF6767;
+	background-color: #FF6767;
+}
+
+.x-tab.x-tab-active.x-tab-default {
+	border-color: #FF6767;
+	background-color: #FF6767;
+}
+
+.x-tab.x-tab-active.x-tab-default .x-tab-inner-default {
+	color: #FFF;
+}
+.x-tab-inner-default {
+    color: #666;
+}
+/*.x-tab-over .x-tab-inner-default {
+    color: #FFF;
+}*/
+.x-tab-default-top.x-tab-focus.x-tab-active {
+    -webkit-box-shadow: #9B9FA4 0 1px 0px 0 inset, #9B9FA4 0 -1px 0px 0 inset, #9B9FA4 -1px 0 0px 0 inset, #9B9FA4 1px 0 0px 0 inset;
+    -moz-box-shadow: #9B9FA4 0 1px 0px 0 inset, #9B9FA4 0 -1px 0px 0 inset, #9B9FA4 -1px 0 0px 0 inset, #9B9FA4 1px 0 0px 0 inset;
+    box-shadow: #9B9FA4 0 1px 0px 0 inset, #9B9FA4 0 -1px 0px 0 inset, #9B9FA4 -1px 0 0px 0 inset, #9B9FA4 1px 0 0px 0 inset; }
+/**************************panel**************************/
+.x-panel-header-default {
+	background-color: #A0A0A0;
+}
+.x-roweditorpanel-header{
+	border-color: #FF6767;
+	background-color: #FF6767;
+}
+.x-panel-header-default .x-tool-img {
+    background-color:transparent;
+}
+.ux-start-menu .x-panel-header-default {
+	background-color: #FF6767;
+}
+/*.x-panel-header-title-default{
+	color: #666;
+}*/
+/**************************taskbar**************************/
+/*.ux-taskbar{
+	background-color: #ECF1F7;
+}*/
+/**************************button*************************/
+.x-btn-default-small {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 3px 3px 3px;
+  border-width: 1px;
+  border-style: solid;
+  background-image: none;
+  background-color: #4b9cd7;
+}
+.x-btn-default-small {
+ border-color: #126daf;
+}
+.x-btn-over.x-btn-default-small {
+  border-color: #3386c2;
+  background-image: none;
+  background-color: #3386c2;
+ }
+ 
+/**************************Grid View Column*************************/
+.x-column-header-inner {
+    padding: 7px 0px 7px 0px;
+}
+
+.x-grid-cell-inner {
+  position: relative;
+  text-overflow: ellipsis;
+  padding: 5px 4px 4px 4px;
+  }
+/**************************Main Tab*************************/
+ .p2-maintab.x-tab.x-tab-active.x-tab-default {
+    border-color: #ebebeb;
+    background-color: #FFF;
+    border-width: 1px 1px 0px 1px
+} 
+.p2-maintab.x-tab.x-tab-active.x-tab-default .x-tab-inner-default {
+    color: #2E3841
+}
+.p2-maintab.x-tab-default-top {
+	border-color: #EBEBEB;
+    border-width: 1px 1px 0px 1px;
+    background-color: #F5F5F5;
+}
+/* .p2-maintab .x-tab-inner-default {
+    color: rgba(55, 62, 74, 0.5);
+} */
+
+.p2-maintab-bar .x-tab-bar-strip-default {
+    border-color: #EBEBEB;
+    background-color: transparent;
+    /*border-width: 1px 1px 0px 1px !important*/
+}
+    
+.p2-maintab-bar.x-tab-bar-default{
+	background-color: #FFF;
+}
+
+.p2-maintab-body .x-panel-default-outer-border-trbl{
+    border-color: #EBEBEB !important;
+    /*border-width: 0px 1px 1px 1px !important;*/
+    border-width: 1px !important;
+}
+.x-tab-default.x-tab-active .x-tab-close-btn {
+    background-position: -24px -12px;
+}
+.x-tab-default .x-tab-close-btn {
+    top: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background: url(images/tab/tab-default-close.png) 0 0;
+    background-position: -24px -12px;
+}
+
+/**************************sidebar-menu********************************/
+.page-container .sidebar-menu #main-menu li {
+  font-weight: normal;
+}
+.page-container .sidebar-menu #main-menu li a {
+	color:#EEEEEE;
+/*color: rgba(139,142,159,1);*/
+}
+.profile-info.dropdown .dropdown-menu li a {
+	color:#EEEEEE;
+}
+ 
+.page-container .sidebar-menu #main-menu li a:hover {
+  background-color: #FF6767;
+}
+.page-container .sidebar-menu #main-menu li ul > li > a:hover {
+  background-color: #FF6767;
+}
+.profile-info.dropdown .dropdown-menu li a:hover {
+  background-color: #FF6767;
+}
+
+a, a:hover, a:focus {
+    color: #FF6767;
+}
+.page-container .sidebar-menu #main-menu li i{
+	color: #AEB9C2
+}
+.headerlinktext,.headerlinktext:hover,.headerlinktext:focus {
+	color: #000;
+}

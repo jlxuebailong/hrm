@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/neptune/ext-theme-neptune-all-debug.css" />
+    <link rel="stylesheet" type="text/css" href="/Ext5/css/ClearButton.css" />
+    <link rel="stylesheet" type="text/css" href="/Ext5/css/Blue.css" />
+
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ux/ClearButton.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
+
+   <style type="text/css">
+   </style>
+   <!--
+     <header>
+            <div style="border-style: dashed; border-color: #0000ff; width: 660px; height:60px; align-content: center;">
+             实验：显示grid的横向滚动条
+             </div>
+         </br></br>
+        </header>
+    -->   
+    <script type="text/javascript">
+        Ext.onReady(function(){
+
+            Ext.create('Ext.data.Store', {
+                storeId: 'simpsonsStore',
+                fields:[ 'name', 'email', 'phone'],
+                data: [
+                    { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+                    { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+                    { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+                    { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+                ]
+            });
+
+ 
+            var desktop = Ext.create('Ext.panel.Panel', {
+                //title: 'Desktop',
+                border: true,
+                bbar: [
+                    { xtype: 'button', text: 'Button 1' }
+                ]
+            });
+
+            var viewport = new Ext.container.Viewport({
+                layout: 'fit',
+                items: [ desktop ]
+            });
+
+            var win = Ext.create('Ext.window.Window', {
+                id: 'gridWin',
+                title: 'App',
+                width : 1000,
+			    height : 600,   //window的宽度
+                closeAction: 'hide',
+                //scrollable: true, //这里设置true时， 且当grid的宽度比window的宽度宽时，就会显示横向滚动条
+                layout: 'fit',
+                //modal : true,
+                //minWidth : 100,
+                border: false,
+                x:0,
+                y:0,
+                maximized : true,
+                stateful: false,
+                isWindow: true,
+                constrainHeader: true,
+                minimizable: true,
+                maximizable: true,
+                items: [
+                  {
+                        title: '',
+                        width: 300,
+                        //height: 100,
+                        tbar: [
+                            { xtype: 'button', text: 'Search' },
+                            { xtype: 'button', text: 'Restsearch' }
+                        ],
+                        items: [
+                            {  // Let's put an empty grid in just to illustrate fit layout
+                            title: '',
+                            xtype: 'grid',
+                            border: false,
+                            //width: 600,
+                            //bodyStyle: 'overflow-x:hidden; overflow-y:hidden',
+                            columns: [
+                                { text: 'Name', dataIndex: 'name', width:201  },
+                                { text: 'Email', dataIndex: 'email', width: 200 },
+                                { text: 'Phone', dataIndex: 'phone', width: 200  }
+                            ],                 
+                            // One header just for show. There's no data,
+                            //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
+                            store: Ext.data.StoreManager.lookup('simpsonsStore')
+                            }
+                        ]
+                    }
+                    
+                ]
+            });
+
+            desktop.add(win);
+            win.show();
+
+         });
+
+         
+
+       
+    </script>
+
+</head>
+<body>
+    <div style='top: 0px;right: 20px;margin: 20px 20px 20px 1px;position: absolute;'>
+    <h1>我说小鼓别响了，妹妹睡在小床中！</h1>
+    </div>
+</body>
+</html>

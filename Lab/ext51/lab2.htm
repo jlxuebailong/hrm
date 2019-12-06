@@ -15,6 +15,12 @@
 
    <style type="text/css">
    </style>
+     <header>
+            <div style="border-style: dashed; border-color: #0000ff; width: 660px; height:60px; align-content: center;">
+             实验：显示grid的横向滚动条
+             </div>
+         </br></br>
+        </header>
     <script type="text/javascript">
         Ext.onReady(function(){
 
@@ -80,7 +86,7 @@
                 //displayMsg : "{0}-{1} of {2}",
                 displayMsg : "{0}-{1} "+'Total'+" {2}",
                 emptyMsg : "No data",
-                //layout: 'fit',
+                layout: 'fit',
                 rowCount : 0,
                 loaddelay : 0,
                 allowSort : true,
@@ -171,7 +177,7 @@
                         }
                     }
                     
-                    this.height = this.parentHeight;
+                    me.setScrollable('horizontal');
 
                     me.callParent();
                     /* 生成一个构造函数，该函数能产生符合规定的Record对象 */
@@ -190,8 +196,7 @@
                         columnLines:true,//fire_add
                         isDialog:this.isDialog,
                         sortableColumns:false,//fire_add
-                        parentWidth : this.parentWidth,
-                        //width: this.gridWidth,//extjs5.1不需要设置宽度也可以显示滚动条， 设置了宽度反而会有问题
+                        parentWidth: this.parentWidth,
                         owner : this,
                         currentIndex : 0,
                         scrollable:true,//fire_add
@@ -428,9 +433,9 @@
                 id: 'gridWin',
                 title: 'Hello',
                 height: 500,
-                width: 600,
+                width: 500,     //window的宽度
                 closeAction: 'hide',
-                //scrollable: true,
+                scrollable: true, //这里设置true时， 且当grid的宽度比window的宽度宽时，就会显示横向滚动条
                 layout: 'fit',
                 modal : true,
                 fbar : ['->',	
@@ -467,7 +472,7 @@
                     /*{
                     elements : 'body',
 			        border : true,
-                    height: 100,
+                    height: 30,
                     id:"demo01_demo01_section_4_container",
 			        bufferResize : true,
                     items : [
@@ -484,7 +489,7 @@
                             //cls:"",
                             fieldCls:"",
                             editable:true,
-                            width:246,
+                            width:200,
                             labelWidth:100,
                             value : "大耳朵图图",
                             oldvalue : "小耳朵图图",
@@ -551,9 +556,9 @@
                         buttonAlign:'center',	
                         clicksToEdit: 1,
                         columnSort : true,
-                        parentWidth: 550.0,
+                        parentWidth: 200.0,
                         parentHeight: 170,
-                        gridWidth: 600,
+                        gridWidth: 900,
                         isfilter : true,
                         isShowFilter : false,
                         listeners : {
@@ -666,10 +671,9 @@
                                     remoteSort: false
                                 })
                     }
-                    /*,
-                    {
+                    ,{
                         title: '',
-                        width: 600,
+                        width: 300,
                         height: 400,
                         tbar: [
                             { xtype: 'button', text: 'Search' },
@@ -692,7 +696,7 @@
                             store: Ext.data.StoreManager.lookup('simpsonsStore')
                             }
                         ]
-                    }*/
+                    }
                     
                 ]
             }).show();
