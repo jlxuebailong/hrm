@@ -55,6 +55,20 @@ Ext.define('Ext.ux.desktop.App', {
 
         Ext.getWin().on('beforeunload', me.onUnload, me);
 
+        Ext.getWin().on('resize', function(){
+            console.log('win.resize: ', arguments);
+        }, me);
+
+        me.desktop.on('resize', function(){
+            console.log('desktop.resize: ', arguments);
+            var activeWindow = me.desktop.getActiveWindow()
+            if(activeWindow){
+                console.log('syncMonitorWindowResize');
+                activeWindow.syncMonitorWindowResize();
+            }
+           
+        }, me);
+
         me.isReady = true;
         me.fireEvent('ready', me);
     },

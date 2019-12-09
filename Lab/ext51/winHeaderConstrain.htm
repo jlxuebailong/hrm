@@ -100,7 +100,12 @@
                         ]
                     }
                     
-                ]
+                ],
+                listeners:{
+                    resize: function(){
+                        console.log('app resize: ', arguments);
+                    }
+                }
             });
 
             desktop.add(win);
