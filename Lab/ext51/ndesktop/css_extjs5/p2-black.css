@@ -1,0 +1,87 @@
+/**************************window**************************/
+.x-window-header-default {
+	font-size: 13px;
+	border-color: #6B7A89;
+	background-color: #6B7A89;
+}
+
+.x-window-default {
+	border-color: #6B7A89;
+}
+
+.x-window-header-default .x-tool-img {
+    background-color: transparent;
+}
+/**************************toolbar**************************/
+.x-toolbar-default {
+	background-color: white;
+}
+
+/**************************tab**************************/
+.x-tab-default {
+	border-color: #9B9FA4;
+}
+
+.x-tab-default-top {
+	background-color: #9B9FA4;
+}
+
+.x-tab-over.x-tab-default {
+	border-color: #858A8F;
+	background-color: #858A8F;
+}
+
+.x-tab-bar-default {
+	background-color: #9B9FA4;
+}
+
+.x-tab-bar-strip-default {
+	border-color: #2F2F2F;
+	background-color: #EDF0F4;
+}
+
+.x-tab.x-tab-active.x-tab-default {
+	border-color: #EDF0F4;
+	background-color: #EDF0F4;
+}
+
+.x-tab.x-tab-active.x-tab-default .x-tab-inner-default {
+	color: #666666;
+}
+.x-tab-default-top.x-tab-focus.x-tab-active {
+    -webkit-box-shadow: #9B9FA4 0 1px 0px 0 inset, #9B9FA4 0 -1px 0px 0 inset, #9B9FA4 -1px 0 0px 0 inset, #9B9FA4 1px 0 0px 0 inset;
+    -moz-box-shadow: #9B9FA4 0 1px 0px 0 inset, #9B9FA4 0 -1px 0px 0 inset, #9B9FA4 -1px 0 0px 0 inset, #9B9FA4 1px 0 0px 0 inset;
+    box-shadow: #9B9FA4 0 1px 0px 0 inset, #9B9FA4 0 -1px 0px 0 inset, #9B9FA4 -1px 0 0px 0 inset, #9B9FA4 1px 0 0px 0 inset; }
+/**************************panel**************************/
+.x-panel-header-default {
+	background-color: #9B9FA4;
+}
+.x-panel-header-default .x-tool-img {
+    background-color:transparent;
+}
+/**************************panel**************************/
+.ux-taskbar{
+	background-color: #ECF1F7;
+}
+
+/**************************button*************************/
+.x-btn-default-small {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 3px 3px 3px;
+  border-width: 1px;
+  border-style: solid;
+  background-image: none;
+  background-color: #6B7A89;
+}
+.x-btn-default-small {
+ border-color: #6B7A89;
+}
+.x-btn-over.x-btn-default-small {
+  border-color: #5c6a78;
+  background-image: none;
+  background-color: #5c6a78;
+ }

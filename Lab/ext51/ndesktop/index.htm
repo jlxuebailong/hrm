@@ -1,0 +1,646 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/neptune/ext-theme-neptune-all-debug.css" />
+    <link rel="stylesheet" type="text/css" href="/Ext5/css/ClearButton.css" />
+    
+    <link rel="stylesheet" type="text/css" href="/Lab/ext51/ndesktop/css_extjs5/p2-blue.css" />
+    <link rel="stylesheet" type="text/css" href="/Lab/ext51/ndesktop/css_extjs5/p2-desktop-ext5.css" />
+    <link rel="stylesheet" type="text/css" href="/Lab/ext51/ndesktop/css_extjs5/p2-ext5.css" />
+    <!--
+    -->
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ux/ClearButton.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
+
+    <script>
+        var SysConfig = {
+            desktopPic: '',
+            restoreText: 'restore',
+            minimizeText: 'minimize',
+            maximizeText: 'maximize',
+            closeText: 'close',
+            startBtnText: 'Start'
+        }, Global = {
+            hello: 'Hi: ',
+            userNameLabel: 'Ageadoc',
+            showDesktopLabel: 'Desktop',
+            startInboxLabel: 'Inbox',
+            startSettingLabel: 'Setting',
+            startLogonSessionLabel: 'LogonSession',
+            startAboutLabel: 'About',
+            startLogoutLabel: 'Logout'
+        };
+
+    </script>
+
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/App.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Desktop.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Module.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/ShortcutModel.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/StartMenu.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/TaskBar.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Video.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Wallpaper.js"></script>
+
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/App.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Desktop.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/StartMenu.js"></script>
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/TaskBar.js"></script>
+
+    <style type="text/css">
+   </style>
+   <!--
+     <header>
+            <div style="border-style: dashed; border-color: #0000ff; width: 660px; height:60px; align-content: center;">
+             实验：显示grid的横向滚动条
+             </div>
+         </br></br>
+        </header>
+    -->   
+    <script type="text/javascript">
+        Ext.onReady(function(){
+
+            var P2Desktop = new P2.desktop.App({
+                id : "P2Desktop"
+            });
+
+            P2Desktop.DEVPLATFORM = Ext.extend(Ext.ux.desktop.Module, {
+				init : function() {
+					this.launcher = {
+						cls : 'x-menu-item-default x-box-item p2-menu-box-item',
+						iconCls :'x-menu-item-icon-default x-menu-item-icon p2-menu-item-icon',
+						arrowCls : 'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-arrow',
+						text : "开发平台",
+						icon:"http://localhost:8080/samex/webclient/images/sysmenu_devplatform.png",
+						handler : function() {return false;},
+						menu : {
+							items : [{text : '数据库管理',icon : 'http://localhost:8080/samex/webclient/images/appimg_configur.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_CONFIGUR',appid:'myportal',windowId:'configur',title:src.text,icon:src.icon},{event:'loadapp',value:'CONFIGUR'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'CONFIGUR'});}}}},{text : '系统设计器',icon : 'http://localhost:8080/samex/webclient/images/appimg_designer.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_DESIGNER',appid:'myportal',windowId:'designer',title:src.text,icon:src.icon},{event:'loadapp',value:'DESIGNER'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DESIGNER'});}}}},{text : '服务管理',icon : 'http://localhost:8080/samex/webclient/images/appimg_service.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_SERVICE',appid:'myportal',windowId:'service',title:src.text,icon:src.icon},{event:'loadapp',value:'SERVICE'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'SERVICE'});}}}},{text : '系统数据绑定',icon : 'http://localhost:8080/samex/webclient/images/appimg_databind.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_DATABIND',appid:'myportal',windowId:'databind',title:src.text,icon:src.icon},{event:'loadapp',value:'DATABIND'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DATABIND'});}}}},{text : 'Excel导入导出模板',icon : 'http://localhost:8080/samex/webclient/images/appimg_dataif.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_DATAIF',appid:'myportal',windowId:'dataif',title:src.text,icon:src.icon},{event:'loadapp',value:'DATAIF'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DATAIF'});}}}},{text : '分类管理',icon : 'http://localhost:8080/samex/webclient/images/appimg_classdefin.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_CLASSDEFIN',appid:'myportal',windowId:'classdefin',title:src.text,icon:src.icon},{event:'loadapp',value:'CLASSDEFIN'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'CLASSDEFIN'});}}}},{text : '工作流设计器',icon : 'http://localhost:8080/samex/webclient/images/appimg_wfdesign.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_WFDESIGN',appid:'myportal',windowId:'wfdesign',title:src.text,icon:src.icon},{event:'loadapp',value:'WFDESIGN'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'WFDESIGN'});}}}},{text : '动作定义',icon : 'http://localhost:8080/samex/webclient/images/appimg_action.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_ACTION',appid:'myportal',windowId:'action',title:src.text,icon:src.icon},{event:'loadapp',value:'ACTION'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'ACTION'});}}}},{text : '角色/岗位',icon : 'http://localhost:8080/samex/webclient/images/appimg_role.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_ROLE',appid:'myportal',windowId:'role',title:src.text,icon:src.icon},{event:'loadapp',value:'ROLE'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'ROLE'});}}}},{text : '条件定义',icon : 'http://localhost:8080/samex/webclient/images/appimg_condition.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_CONDITION',appid:'myportal',windowId:'condition',title:src.text,icon:src.icon},{event:'loadapp',value:'CONDITION'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'CONDITION'});}}}},{text : 'WebService配置',icon : 'http://localhost:8080/samex/webclient/images/appimg_wsconfig.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_WSCONFIG',appid:'myportal',windowId:'wsconfig',title:src.text,icon:src.icon},{event:'loadapp',value:'WSCONFIG'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'WSCONFIG'});}}}}]
+						},
+						listeners : {
+							afterrender:function( src, eOpts ){
+							    src.getEl().addListener("mouseleave", function(e, t) {
+								    src.hideMenu();
+								});
+							}
+						} 
+					}
+				}
+			});
+			
+
+			P2Desktop.SETUP = Ext.extend(Ext.ux.desktop.Module, {
+				init : function() {
+					this.launcher = {
+						cls : 'x-menu-item-default x-box-item p2-menu-box-item',
+						iconCls :'x-menu-item-icon-default x-menu-item-icon p2-menu-item-icon',
+						arrowCls : 'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-arrow',
+						text : "系统管理",
+						icon:"http://localhost:8080/samex/webclient/images/modimg_setup.png",
+						handler : function() {return false;},
+						menu : {
+							items : [{text : '企业站点',icon : 'http://localhost:8080/samex/webclient/images/appimg_multisite.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_MULTISITE',appid:'myportal',windowId:'multisite',title:src.text,icon:src.icon},{event:'loadapp',value:'MULTISITE'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'MULTISITE'});}}}},{text : '应用数据绑定',icon : 'http://localhost:8080/samex/webclient/images/appimg_appdbind.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_APPDBIND',appid:'myportal',windowId:'appdbind',title:src.text,icon:src.icon},{event:'loadapp',value:'APPDBIND'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'APPDBIND'});}}}},{text : '用户权限组',icon : 'http://localhost:8080/samex/webclient/images/appimg_securgroup.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_SECURGROUP',appid:'myportal',windowId:'securgroup',title:src.text,icon:src.icon},{event:'loadapp',value:'SECURGROUP'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'SECURGROUP'});}}}},{text : '用户账号',icon : 'http://localhost:8080/samex/webclient/images/appimg_user.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_USER',appid:'myportal',windowId:'user',title:src.text,icon:src.icon},{event:'loadapp',value:'USER'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'USER'});}}}},{text : '人力资源',icon : 'http://localhost:8080/samex/webclient/images/appimg_person.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_HR',appid:'myportal',windowId:'hr',title:src.text,icon:src.icon},{event:'loadapp',value:'HR'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'HR'});}}}},{text : '人力资源小组',icon : 'http://localhost:8080/samex/webclient/images/appimg_persongr.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_WORKGROUP',appid:'myportal',windowId:'workgroup',title:src.text,icon:src.icon},{event:'loadapp',value:'WORKGROUP'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'WORKGROUP'});}}}},{text : '自动提醒器',icon : 'http://localhost:8080/samex/webclient/images/appimg_reminder.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_REMINDER',appid:'myportal',windowId:'reminder',title:src.text,icon:src.icon},{event:'loadapp',value:'REMINDER'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'REMINDER'});}}}},{text : '消息模板',icon : 'http://localhost:8080/samex/webclient/images/appimg_commtmplt.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_EMAILTMPLT',appid:'myportal',windowId:'emailtmplt',title:src.text,icon:src.icon},{event:'loadapp',value:'EMAILTMPLT'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'EMAILTMPLT'});}}}},{text : '报表管理',icon : 'http://localhost:8080/samex/webclient/images/appimg_report.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_REPORT',appid:'myportal',windowId:'report',title:src.text,icon:src.icon},{event:'loadapp',value:'REPORT'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'REPORT'});}}}}]
+						},
+						listeners : {
+							afterrender:function( src, eOpts ){
+							    src.getEl().addListener("mouseleave", function(e, t) {
+								    src.hideMenu();
+								});
+							}
+						} 
+					}
+				}
+			});
+			
+
+			P2Desktop.REPORTING = Ext.extend(Ext.ux.desktop.Module, {
+				init : function() {
+					this.launcher = {
+						cls : 'x-menu-item-default x-box-item p2-menu-box-item',
+						iconCls :'x-menu-item-icon-default x-menu-item-icon p2-menu-item-icon',
+						arrowCls : 'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-arrow',
+						text : "信息中心",
+						icon:"http://localhost:8080/samex/webclient/images/modimg_reporting.png",
+						handler : function() {return false;},
+						menu : {
+							items : [{text : '我的日程',icon : 'http://localhost:8080/samex/webclient/images/appimg_myschedule.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_MYSCHEDULE',appid:'myportal',windowId:'myschedule',title:src.text,icon:src.icon},{event:'loadapp',value:'MYSCHEDULE'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'MYSCHEDULE'});}}}},{text : 'KPI 中心',icon : 'http://localhost:8080/samex/webclient/images/appimg_kpicenter.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_KPICENTER',appid:'myportal',windowId:'kpicenter',title:src.text,icon:src.icon},{event:'loadapp',value:'KPICENTER'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'KPICENTER'});}}}},{text : '报表中心',icon : 'http://localhost:8080/samex/webclient/images/appimg_reportcent.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_REPORTCENT',appid:'myportal',windowId:'reportcent',title:src.text,icon:src.icon},{event:'loadapp',value:'REPORTCENT'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'REPORTCENT'});}}}},{text : 'KPI 管理器',icon : 'http://localhost:8080/samex/webclient/images/appimg_kpi.png',disabled:false,handler : function(src) {Ext.p2.AppWindow.openWindow(P2Desktop.getDesktop(), {id:'win_KPI',appid:'myportal',windowId:'kpi',title:src.text,icon:src.icon},{event:'loadapp',value:'KPI'})},menuExpandDelay:1000,arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',menu :{items:{text:Global.startCreateShortcut,iconCls:'addshortcut_icon',handler:function(){Ext.p2.sendEvent({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'KPI'});}}}}]
+						},
+						listeners : {
+							afterrender:function( src, eOpts ){
+							    src.getEl().addListener("mouseleave", function(e, t) {
+								    src.hideMenu();
+								});
+							}
+						} 
+					}
+				}
+			});
+			
+
+			P2Desktop.DEMO = Ext.extend(Ext.ux.desktop.Module, {
+				init : function() {
+					this.launcher = {
+						cls : 'x-menu-item-default x-box-item p2-menu-box-item',
+						iconCls :'x-menu-item-icon-default x-menu-item-icon p2-menu-item-icon',
+						arrowCls : 'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-arrow',
+						text : "示例",
+						icon:"http://localhost:8080/samex/webclient/images/",
+						handler : function() {return false;},
+						menu : {
+                            items : [{
+                                text : '示例 02',
+                                icon : 'http://localhost:8080/samex/webclient/images/',
+                                disabled:false,
+                                handler : function(src) {
+                                    if(Ext.get('win_DEMO_02')){
+                                        //Ext.get('win_DEMO_02').isVisible() ? Ext.get('win_DEMO_02').hide() : Ext.get('win_DEMO_02').show();
+                                        return;
+                                    }
+                                    var win = P2Desktop.getDesktop().createWindow({
+                                        id:'win_DEMO_02',
+                                        appid:'myportal',
+                                        windowId:'demo_02',
+                                        title : 'App:demo_02',
+                                        width : 1000,
+                                        height : 600,
+                                        // 最小宽度
+                                        //minWidth : 500,
+                                        x:0,
+                                        y:0,
+                                        maximized : true,
+                                        layout : 'fit',
+                                        flex: 1,
+                                        listeners:{
+                                            resize: function(){
+                                                console.log('app resize: ', arguments);
+                                            }
+                                        },
+                                        items : [{
+	
+                                            xtype : "fieldset",
+                                            title : "更多搜索",
+                                            collapsible : true,
+                                            collapsed : false,
+                                            //animCollapse : false,
+                                            //collapseFirst: false,
+                                            //titleCollapse:true,
+                                            collapsible : true,
+                                            items:[
+                                            {
+                                                id : "hr_hr_sectionrow_dd_4",
+                                                windowId : "hr_sectionrow_dd_4",
+                                                controltype:"sectionrow",
+                                                bodyStyle : "background-color:#FEFEFE",
+                                                layout : "column",
+                                                forceLayout :true,
+                                                border : false,
+                                                items : [
+                                                {
+                                                    id : "hr_hr_sectioncol_dd_10",
+                                                    windowId : "hr_sectioncol_dd_10",
+                                                    controltype:"sectioncol",
+                                                    bodyStyle : "background-color:#FEFEFE",
+                                                    columnWidth : 0.499,
+                                                    //layout : "form",
+                                                    border : false,
+                                                    items: [
+                                                        {
+                                                            elements : 'body',
+                                                            border : false,
+                                                            items : [
+                                                                {
+                                                                    id : "hr_hr_sectionrow_dd_6",
+                                                                    windowId : "hr_sectionrow_dd_6",
+                                                                    controltype:"sectionrow",
+                                                                    bodyStyle : "background-color:#FEFEFE",
+                                                                    layout : "column",
+                                                                    forceLayout :true,
+                                                                    border : false,
+                                                                    items : [
+                                                                        {
+                                                                            id : "hr_hr_sectioncol_dd_15",
+                                                                            windowId : "hr_sectioncol_dd_15",
+                                                                            controltype:"sectioncol",
+                                                                            bodyStyle : "background-color:#FEFEFE",
+                                                                            columnWidth : 0.499,
+                                                                            //layout : "form",
+                                                                            border : false,
+                                                                            items:[
+                                                                                {
+                                                                                    elements : 'body',
+                                                                                    border : false,
+                                                                                    items:[
+                                                                                        {
+                                                                                            id : "hr_hr_textbox_dd_1",
+                                                                                            windowId : "hr_textbox_dd_1",
+                                                                                            controltype:"textbox",
+                                                                                            xtype : 'textfield',
+                                                                                            hasDesc:false,
+                                                                                            fieldLabel : "聘用日期1(自)",			
+                                                                                            labelSeparator : '',
+                                                                                            //cls:"",
+                                                                                            fieldCls:"",
+                                                                                            editable:true,
+                                                                                            width:246,
+                                                                                            labelWidth:100,
+                                                                                            value : "",
+                                                                                            oldvalue : "",
+                                                                                            enableKeyEvents :true,
+                                                                                            selectOnFocus : false,
+                                                                                            listeners : {
+                                                                                                render: function(src){
+                                                                                                    if(src.labelEl){
+                                                                                                        Ext.create('Ext.tip.ToolTip', {
+                                                                                                            target: src.labelEl.id,
+                                                                                                            html: "聘用日期"
+                                                                                                        });
+                                                                                                    }
+                                                                                                },
+                                                                                            },
+                                                                                            langCode : 'zh',
+                                                                                            xtype:'datefield',
+                                                                                            format : "Y-m-d",
+                                                                                            name:""
+                                                                                        },
+                                                                                        {
+                                                                                            id : "hr_hr_textbox_dd_2",
+                                                                                            windowId : "hr_textbox_dd_2",
+                                                                                            controltype:"textbox",
+                                                                                            xtype : 'textfield',
+                                                                                            hasDesc:false,
+                                                                                            fieldLabel : "聘用日期2(自)",			
+                                                                                            labelSeparator : '',
+                                                                                            //cls:"",
+                                                                                            fieldCls:"",
+                                                                                            editable:true,
+                                                                                            width:246,
+                                                                                            labelWidth:100,
+                                                                                            value : "",
+                                                                                            oldvalue : "",
+                                                                                            enableKeyEvents :true,
+                                                                                            selectOnFocus : false,
+                                                                                            listeners : {
+                                                                                                render: function(src){
+                                                                                                    if(src.labelEl){
+                                                                                                        Ext.create('Ext.tip.ToolTip', {
+                                                                                                            target: src.labelEl.id,
+                                                                                                            html: "聘用日期"
+                                                                                                        });
+                                                                                                    }
+                                                                                                },
+                                                                                            },
+                                                                                            langCode : 'zh',
+                                                                                            xtype:'datefield',
+                                                                                            format : "Y-m-d",
+                                                                                            name:""
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            id : "hr_hr_sectioncol_dd_17",
+                                                                            windowId : "hr_sectioncol_dd_17",
+                                                                            controltype:"sectioncol",
+                                                                            bodyStyle : "background-color:#FEFEFE",
+                                                                            columnWidth : 0.499,
+                                                                            //layout : "form",
+                                                                            border : false,
+                                                                            items:[
+                                                                                {
+                                                                                    elements : 'body',
+                                                                                    border : false,
+                                                                                    items:[
+                                                                                        {
+                                                                                            id : "hr_hr_textbox_dd_3",
+                                                                                            windowId : "hr_textbox_dd_3",
+                                                                                            controltype:"textbox",
+                                                                                            xtype : 'textfield',
+                                                                                            hasDesc:false,
+                                                                                            fieldLabel : "聘用日期3(自)",			
+                                                                                            labelSeparator : '',
+                                                                                            //cls:"",
+                                                                                            fieldCls:"",
+                                                                                            editable:true,
+                                                                                            width:246,
+                                                                                            labelWidth:100,
+                                                                                            value : "",
+                                                                                            oldvalue : "",
+                                                                                            enableKeyEvents :true,
+                                                                                            selectOnFocus : false,
+                                                                                            listeners : {
+                                                                                                render: function(src){
+                                                                                                    if(src.labelEl){
+                                                                                                        Ext.create('Ext.tip.ToolTip', {
+                                                                                                            target: src.labelEl.id,
+                                                                                                            html: "聘用日期"
+                                                                                                        });
+                                                                                                    }
+                                                                                                },
+                                                                                            },
+                                                                                            langCode : 'zh',
+                                                                                            xtype:'datefield',
+                                                                                            format : "Y-m-d",
+                                                                                            name:""
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                                ]
+                                            }
+                                            ]
+                                            }
+                                        ]
+                                    });
+                                    win.show();
+                                },
+                                menuExpandDelay:1000,
+                                arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',
+                                menu :{
+                                        items:{
+                                            text:Global.startCreateShortcut,
+                                            iconCls:'addshortcut_icon',
+                                            handler:function(){
+                                                console.log({
+                                                    event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DEMO_02'
+                                                });
+                                            }
+                                        }
+                                }},
+                                {text : '示例 01',icon : 'http://localhost:8080/samex/webclient/images/',
+                                disabled:false,
+                                handler:function(){
+                                                if(Ext.get('win_DEMO_01')){
+                                                    return;
+                                                }
+                                                var win = P2Desktop.getDesktop().createWindow({
+                                                    id:'win_DEMO_01',
+                                                    appid:'myportal',
+                                                    windowId:'demo_01',
+                                                    title : 'App:demo_01',
+                                                    width : 1000,
+                                                    height : 600,
+                                                    // 最小宽度
+                                                    //minWidth : 500,
+                                                    x:0,
+                                                    y:0,
+                                                    maximized : true,
+                                                    layout : 'fit',
+                                                    flex: 1,
+                                                    listeners:{
+                                                        resize: function(){
+                                                            console.log('app resize: ', arguments);
+                                                        }
+                                                    }
+                                                });
+                                                win.show();
+                                            
+                                },
+                                menuExpandDelay:1000,
+                                arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',
+                                menu :{
+                                    items:{
+                                        text:Global.startCreateShortcut,
+                                        iconCls:'addshortcut_icon',
+                                        handler:function(){
+                                            console.log({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DEMO01'});}
+                                    }
+                                }
+                            }]
+						},
+						listeners : {
+							afterrender:function( src, eOpts ){
+							    src.getEl().addListener("mouseleave", function(e, t) {
+								    src.hideMenu();
+								});
+							}
+						} 
+					}
+				}
+			});
+			
+            P2Desktop.getModules = function() {
+                    return [new P2Desktop.DEVPLATFORM(),new P2Desktop.SETUP(),new P2Desktop.REPORTING(),new P2Desktop.DEMO()];
+            };
+
+            /*Ext.define('Ext.p2.AppWindow', {
+                extend : 'Ext.window.Window',
+                title : 'AppWindow',
+                width : 1000,
+                height : 600,
+                // 最小宽度
+                //minWidth : 500,
+                x:0,
+                y:0,
+                //maximized : true,
+                layout : 'fit',
+                // shim : false,
+                //animCollapse : false,
+                //autoDestroy : false,
+                //immediateClose : false,
+                // 延迟
+                //bufferResize : true,
+                // 初始化窗口 
+                initComponent : function() {
+                            Ext.p2.AppWindow.superclass.initComponent.call(this);
+                            this.dlgmanager = new Ext.p2.DialogManager();
+                            this.panelmanager=new Ext.p2.PanelManager();
+                            this.appTitle = this.title;
+                        },
+
+                        listeners : {
+                            'activate' : function(owner) {
+                                // if (!Ext.isEmpty(owner.windowId) && Global.currentApp !=
+                                // owner.windowId)
+                                if (!Ext.isEmpty(owner.windowId) && !Ext.isEmpty(owner.appid))
+                                    Ext.p2.sendEvent({
+                                                event : "switchapp",
+                                                appid : owner.appid,
+                                                value : owner.windowId
+                                            }, this, function(resp) {
+                                                eval(resp.responseText);
+                                                Global.currentApp = owner.windowId;
+                                            });
+                            },
+                            'beforeclose' : function(owner) {
+                                if (this.immediateClose == true) {
+                                    return true;
+                                } else {
+                                    if (!Ext.isEmpty(owner.windowId))
+                                        Ext.p2.sendEvent({
+                                            event : "closeapp",
+                                            value : owner.windowId
+                                        })
+                                    return false;
+                                }
+                            }
+                        },
+                        openDialog : function(dlgargs) {
+                            Ext.Component.resumeLayouts(true);
+                            var me = this;
+                            if(!window.P2Desktop.getDesktop()){
+                                setTimeout(function() {
+                                    me.dlgmanager.openDialog(Ext.apply(dlgargs, {
+                                        owner : me
+                                    }));
+                                }, 1000);
+                            }else{
+                                me.dlgmanager.openDialog(Ext.apply(dlgargs, {
+                                    owner : me
+                                }));
+                            }
+                        },
+
+                        closeDialog : function(dlgid, isMessageBox) {
+                            this.dlgmanager.closeDialog(dlgid, isMessageBox)
+                        },
+                        openDiaPanel : function(dlgargs) {
+                            this.panelmanager.openDiaPanel(Ext.apply(dlgargs, {
+                                owner : this
+                            }));
+                        },
+                       // 在标题上显示当前的状态 
+                        showStatus : function(status) {
+                            var me = this;
+                            if (status != null && status != "null" && status.length > 0) {
+                                var p2sysmessage = Ext.get('ux-sysmessage');
+                                if (Ext.isObject(p2sysmessage)) {
+                                    // login_user_name = p2sysmessage.dom.innerHTML;
+                                    p2sysmessage.dom.innerHTML = status;
+                                    setTimeout(function() {
+                                                var p2sysmessage = Ext.get('ux-sysmessage');
+                                                p2sysmessage.dom.innerHTML = "";
+                                            }, 10000);
+                                } else {
+                                    me.setTitle(me.appTitle + "&nbsp;&nbsp;&nbsp;&nbsp; -- " + status);
+                                    // setTimeout(this.setTitle.createDelegate(this, [ this.appTitle ]), 10000);
+
+                                    Ext.Function.defer(function() {
+                                                me.setTitle(me.appTitle)
+                                            }, 10000);
+                                }
+                            }
+                        },
+                
+                        closeAppWindow : function() {
+                            this.immediateClose = true;
+                            this.close();
+                        },
+                        beforeDestroy : function() {
+                            var me = this;
+                            if (me.dlgmanager) {
+                                this.dlgmanager.destroy();
+                                me.dlgmanager = null;
+                            }
+                            me.callParent();
+                        }
+            });*/
+
+            /*Ext.create('Ext.data.Store', {
+                storeId: 'simpsonsStore',
+                fields:[ 'name', 'email', 'phone'],
+                data: [
+                    { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+                    { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+                    { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+                    { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+                ]
+            });
+
+ 
+            var desktop = Ext.create('Ext.panel.Panel', {
+                //title: 'Desktop',
+                border: true,
+                bbar: [
+                    { xtype: 'button', text: 'Button 1' }
+                ]
+            });
+
+            var viewport = new Ext.container.Viewport({
+                layout: 'fit',
+                items: [ desktop ]
+            });
+
+            var win = Ext.create('Ext.window.Window', {
+                id: 'gridWin',
+                title: 'App',
+                width : 1000,
+			    height : 600,   //window的宽度
+                closeAction: 'hide',
+                //scrollable: true, //这里设置true时， 且当grid的宽度比window的宽度宽时，就会显示横向滚动条
+                layout: 'fit',
+                //modal : true,
+                //minWidth : 100,
+                border: false,
+                x:0,
+                y:0,
+                maximized : true,
+                stateful: false,
+                isWindow: true,
+                constrainHeader: true,
+                minimizable: true,
+                maximizable: true,
+                items: [
+                  {
+                        title: '',
+                        width: 300,
+                        //height: 100,
+                        tbar: [
+                            { xtype: 'button', text: 'Search' },
+                            { xtype: 'button', text: 'Restsearch' }
+                        ],
+                        items: [
+                            {  // Let's put an empty grid in just to illustrate fit layout
+                            title: '',
+                            xtype: 'grid',
+                            border: false,
+                            //width: 600,
+                            //bodyStyle: 'overflow-x:hidden; overflow-y:hidden',
+                            columns: [
+                                { text: 'Name', dataIndex: 'name', width:201  },
+                                { text: 'Email', dataIndex: 'email', width: 200 },
+                                { text: 'Phone', dataIndex: 'phone', width: 200  }
+                            ],                 
+                            // One header just for show. There's no data,
+                            //store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
+                            store: Ext.data.StoreManager.lookup('simpsonsStore')
+                            }
+                        ]
+                    }
+                    
+                ]
+            });
+
+            desktop.add(win);
+            win.show();*/
+
+         });
+
+    </script>
+
+</head>
+<body>
+    <div id="x-desktop" style="background: url('<%=desktopfileSrc %>') no-repeat;background-size: 100% 100%;">
+        <div style='top: 0px;right: 20px;margin: 20px 20px 20px 1px;position: absolute;'>
+        <h1>我说小鼓别响了，妹妹睡在小床中！</h1>
+        </div>
+    </div>
+    <div id="ux-taskbar" style="position: fixed;bottom:0px;width: 100%;">
+
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,6 @@
+/*******************************************
+ * Extend System Styles
+ ******************************************/
+.entypo-sysmenu_devplatform:before { content: '\e856'; }
+.entypo-modimg_setup:before { content: '\e8bb'; }
+.entypo-modimg_reporting:before { content: '\e853'; }
