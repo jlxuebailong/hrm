@@ -21,12 +21,10 @@ Ext.define('Ext.ux.desktop.Desktop', {
         'Ext.view.View', // dataview
         'Ext.window.Window',
 
-        'Ext.ux.desktop.TaskBar',
         'Ext.ux.desktop.Wallpaper'
     ],
 
     desktopEl: Ext.get('x-desktop'),
-    taskbarEl: Ext.get('ux-taskbar'),
     shortcutsEl: Ext.get('x-shortcuts'),
 
     activeWindowCls: 'ux-desktop-active-win',
@@ -86,20 +84,14 @@ Ext.define('Ext.ux.desktop.Desktop', {
     initComponent: function () {
         var me = this, Element = Ext.Element,  viewWidth = Element.getViewportWidth(),viewHeight = Element.getViewportHeight();
 
-        console.log('desktop initComponent: ',me.desktopEl, me.taskbarEl);
-
         me.windowMenu = new Ext.menu.Menu(me.createWindowMenu());
 
-        me.taskbar = new Ext.ux.desktop.TaskBar(me.taskbarConfig);
+        me.app.taskbar.windowMenu = me.windowMenu;
+        me.windowGroups = new Ext.WindowGroup();
+        me.windowGroups.setBase(100);
 
-        me.taskbar.render(me.taskbarEl);
-
-        console.log('taskbarEl getHeight: ',me.taskbarEl.getHeight(),'setHeight:', viewHeight  - me.taskbarEl.getHeight());
-
-        me.setWidth(viewWidth );
-        me.setHeight(viewHeight  - me.taskbarEl.getHeight());
-
-        me.taskbar.windowMenu = me.windowMenu;
+        me.setWidth(viewWidth);
+        me.setHeight(viewHeight  - me.app.taskbar.getHeight() || 38);
 
         me.windows = new Ext.util.MixedCollection();
 
@@ -123,18 +115,12 @@ Ext.define('Ext.ux.desktop.Desktop', {
         }
 
         Ext.on('resize', function(){
-            console.log('desktop.resize: ', arguments);
             viewWidth = Element.getViewportWidth(),viewHeight = Element.getViewportHeight();
             me.setWidth(viewWidth );
-            me.setHeight(viewHeight  - me.taskbarEl.getHeight());
-
-            var activeWindow = me.getActiveWindow()
-            if(activeWindow){
-                //console.log('syncMonitorWindowResize');
-                activeWindow.syncMonitorWindowResize();
-            }
-           
+            me.setHeight(viewHeight  - Ext.get('ux-taskbar').getHeight());
         }, me, {buffer: 100});
+
+
     },
 
     afterRender: function () {
@@ -179,25 +165,6 @@ Ext.define('Ext.ux.desktop.Desktop', {
         return ret;
     },
 
-    createWindowMenu: function () {
-        var me = this;
-        return {
-            defaultAlign: 'br-tr',
-            items: [
-                { text: 'Restore', handler: me.onWindowMenuRestore, scope: me },
-                { text: 'Minimize', handler: me.onWindowMenuMinimize, scope: me },
-                { text: 'Maximize', handler: me.onWindowMenuMaximize, scope: me },
-                '-',
-                { text: 'Close', handler: me.onWindowMenuClose, scope: me }
-            ],
-            listeners: {
-                beforeshow: me.onWindowMenuBeforeShow,
-                hide: me.onWindowMenuHide,
-                scope: me
-            }
-        };
-    },
-
     //------------------------------------------------------
     // Event handler methods
 
@@ -213,7 +180,6 @@ Ext.define('Ext.ux.desktop.Desktop', {
 
     onDesktopMenuBeforeShow: function (menu) {
         var me = this, count = me.windows.getCount();
-
         menu.items.each(function (item) {
             var min = item.minWindows || 0;
             item.setDisabled(count < min);
@@ -248,13 +214,14 @@ Ext.define('Ext.ux.desktop.Desktop', {
 			    	Ext.p2.sendEvent({event:'delshortcut',targetid:'myportal',appid:'myportal',value:appname});
 			    }
         	}]
-        }).showAt(e.getXY());
+        });
+        menu.showAt(e.getXY());
     },
 
     onWindowClose: function(win) {
         var me = this;
         me.windows.remove(win);
-        me.taskbar.removeTaskButton(win.taskButton);
+        me.app.taskbar.removeTaskButton(win.taskButton);
         me.updateActiveWindow();
     },
 
@@ -284,6 +251,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
         var me = this, win = me.windowMenu.theWin;
 
         win.maximize();
+        console.log('onWindowMenuMaximize');
         win.toFront();
     },
 
@@ -347,7 +315,8 @@ Ext.define('Ext.ux.desktop.Desktop', {
                 isWindow: true,
                 constrainHeader: true,
                 minimizable: true,
-                maximizable: true
+                maximizable: true,
+                floating: true
             });
 
         cls = cls || Ext.window.Window;
@@ -355,7 +324,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
 
         me.windows.add(win);
 
-        win.taskButton = me.taskbar.addTaskButton(win);
+        win.taskButton = me.app.taskbar.addTaskButton(win);
         win.animateTarget = win.taskButton.el;
 
         win.on({
@@ -376,14 +345,6 @@ Ext.define('Ext.ux.desktop.Desktop', {
                     win.resizer.widthIncrement = me.xTickSize;
                     win.resizer.heightIncrement = me.yTickSize;
                 }
-                //Bring taskbar to front 
-                /*if(me.windowMenu.zIndexManager == undefined) {
-                	win.zIndexManager.register(me.windowMenu);
-                }
-                if(me.taskbar.zIndexManager == undefined)   {  
-                	win.zIndexManager.register(me.taskbar);
-                	win.zIndexManager.bringToFront(me.taskbar,   true);
-                }*/
             },
             single: true
         });
@@ -401,6 +362,30 @@ Ext.define('Ext.ux.desktop.Desktop', {
             });
         };
 
+        win.on({
+            
+            'afterrender': function(){
+                Ext.WindowManager.eachTopDown(function (comp) {
+                    console.log('[afterrender] each zstack: ', comp.getId());
+                });
+                
+                Ext.WindowManager.unregister(win);
+                console.log('me.windowGroups unregister:', win);
+
+                Ext.WindowManager.eachTopDown(function (comp) {
+                    console.log('[afterrender] each zstack: ', comp.getId());
+                });
+
+                me.windowGroups.register(win);
+
+            },
+            'render':function(){
+                Ext.WindowManager.eachTopDown(function (comp) {
+                    console.log('[rende] reach zstack: ', comp.getId());
+                });
+            }
+        })
+       
         return win;
     },
 
@@ -440,6 +425,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
     },
 
     restoreWindow: function (win) {
+        console.log('restoreWindow');
         if (win.isVisible()) {
             win.restore();
             win.toFront();
@@ -498,6 +484,24 @@ Ext.define('Ext.ux.desktop.Desktop', {
             activeWindow.active = true;
         }
 
-        me.taskbar.setActiveButton(activeWindow && activeWindow.taskButton);
+        me.app.taskbar.setActiveButton(activeWindow && activeWindow.taskButton);
+    },
+    createWindowMenu: function () {
+        var me = this;
+        return {
+            defaultAlign: 'br-tr',
+            items: [
+                { text: 'Restore', handler: me.onWindowMenuRestore, scope: me},
+                { text: 'Minimize', handler: me.onWindowMenuMinimize, scope: me},
+                { text: 'Maximize', handler: me.onWindowMenuMaximize, scope: me},
+                '-',
+                { text: 'Close', handler: me.onWindowMenuClose, scope: me}
+            ],
+            listeners: {
+                beforeshow: me.onWindowMenuBeforeShow,
+                hide: me.onWindowMenuHide,
+                scope: me
+            }
+        };
     }
 });

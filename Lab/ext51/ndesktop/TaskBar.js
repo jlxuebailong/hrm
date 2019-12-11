@@ -29,7 +29,6 @@ Ext.override(Ext.ux.desktop.TaskBar, {
 			listeners:{
 				click:function(){
                     var cmp=Ext.getCmp('startTooltip');
-                    console.log(me.startMenu);
 					if(cmp){
 						cmp.destroy();
 					}

@@ -40,7 +40,7 @@
 
     </script>
 
-    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/App.js"></script>
+   
     <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Desktop.js"></script>
     <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Module.js"></script>
     <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/ShortcutModel.js"></script>
@@ -49,6 +49,7 @@
     <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Video.js"></script>
     <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/Wallpaper.js"></script>
 
+    <script type="text/javascript" src="/Lab/ext51/ndesktop/Ext/ux/desktop/App.js"></script>
     <script type="text/javascript" src="/Lab/ext51/ndesktop/App.js"></script>
     <script type="text/javascript" src="/Lab/ext51/ndesktop/Desktop.js"></script>
     <script type="text/javascript" src="/Lab/ext51/ndesktop/StartMenu.js"></script>
@@ -177,9 +178,6 @@
                                         layout : 'fit',
                                         flex: 1,
                                         listeners:{
-                                            resize: function(){
-                                                console.log('app resize: ', arguments);
-                                            }
                                         },
                                         items : [{
 	
@@ -401,9 +399,6 @@
                                                     layout : 'fit',
                                                     flex: 1,
                                                     listeners:{
-                                                        resize: function(){
-                                                            console.log('app resize: ', arguments);
-                                                        }
                                                     }
                                                 });
                                                 win.show();
@@ -633,12 +628,13 @@
 
 </head>
 <body>
-    <div id="x-desktop" style="background: url('<%=desktopfileSrc %>') no-repeat;background-size: 100% 100%;">
+    <div id="x-desktop" style="background: url('<%=desktopfileSrc %>') no-repeat;background-size: 99% 99%;">
         <div style='top: 0px;right: 20px;margin: 20px 20px 20px 1px;position: absolute;'>
         <h1>我说小鼓别响了，妹妹睡在小床中！</h1>
         </div>
     </div>
-    <div id="ux-taskbar" style="position: fixed;bottom:0px;width: 100%;">
+
+    <div id="ux-taskbar">
 
     </div>
     

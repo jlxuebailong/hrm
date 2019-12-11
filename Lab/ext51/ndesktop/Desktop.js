@@ -36,11 +36,20 @@ Ext.override(Ext.ux.desktop.Desktop, {
 				'</div>',
 				'<div calss="x-clear"></div>'
 			],
+
+			onShortcutItemClick : function(dataView, record) {
+				var me = this; // , module = me.app.getModule(record.data.module),
+				if (Ext.isFunction(record.data.handler)) {
+					record.data.handler.call();
+				}
+			},
 			createWindowMenu: function() {
 				var me = this;
 				return {
 					defaultAlign : 'br-tr',
+					floating: true,
 					alwaysOnTop: true,
+					bodyStyle: {zIndex: 120010},
 					items : [{
 								text : SysConfig.restoreText,
 								handler : me.onWindowMenuRestore,
@@ -64,11 +73,5 @@ Ext.override(Ext.ux.desktop.Desktop, {
 						scope : me
 					}
 				};
-			},
-			onShortcutItemClick : function(dataView, record) {
-				var me = this; // , module = me.app.getModule(record.data.module),
-				if (Ext.isFunction(record.data.handler)) {
-					record.data.handler.call();
-				}
 			}
 		});

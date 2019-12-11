@@ -13,7 +13,8 @@ Ext.define('Ext.ux.desktop.App', {
     requires: [
         'Ext.container.Viewport',
 
-        'Ext.ux.desktop.Desktop'
+        'Ext.ux.desktop.Desktop',
+        'Ext.ux.desktop.TaskBar'
     ],
 
     isReady: false,
@@ -45,14 +46,15 @@ Ext.define('Ext.ux.desktop.App', {
         }
 
         desktopCfg = me.getDesktopConfig();
+        me.taskbar = new Ext.ux.desktop.TaskBar(desktopCfg.taskbarConfig);
+        me.taskbar.render();
 
-        
         me.desktop = new Ext.ux.desktop.Desktop(desktopCfg);
-
-        me.viewport = new Ext.container.Viewport({
+        me.desktop.render('x-desktop');
+        /*me.viewport = new Ext.container.Viewport({
             //layout: 'fit',
             items: [ me.desktop]
-        });
+        });*/
 
         Ext.getWin().on('beforeunload', me.onUnload, me);
 

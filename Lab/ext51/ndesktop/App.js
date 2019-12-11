@@ -161,5 +161,5 @@ Ext.define('P2.ux.desktop.App', {
 				text:Global.tbtaskcount
 		    }]
 		});
-    }
+	}
 });

@@ -5,6 +5,11 @@
  * http://www.sencha.com/license
  */
 
+Ext.ux.TaskBar = function(app){
+    this.app = app;
+    this.init();
+}
+
 /**
  * @class Ext.ux.desktop.TaskBar
  * @extends Ext.toolbar.Toolbar
@@ -26,11 +31,12 @@ Ext.define('Ext.ux.desktop.TaskBar', {
 
     cls: 'ux-taskbar',
     //renderTo: 'ux-taskbar',
-    //x: 0, y: 500,
-    //focusOnToFront : true,
-    //floating: true,
-    //alwaysOnTop : true,
-    dock: 'bottom',
+    x: 0, y: Ext.Element.getViewportHeight()-38,
+    width:Ext.Element.getViewportWidth(),
+    //focusOnToFront : false,
+    floating: true,
+    alwaysOnTop : false,
+    el: 'ux-taskbar',
     /**
      * @cfg {String} startBtnText
      * The text for the Start Button.
@@ -152,6 +158,7 @@ Ext.define('Ext.ux.desktop.TaskBar', {
     },
 
     onWindowBtnClick: function (btn) {
+        console.log('onWindowBtnClick');
         var win = btn.win;
 
         if (win.minimized || win.hidden) {
