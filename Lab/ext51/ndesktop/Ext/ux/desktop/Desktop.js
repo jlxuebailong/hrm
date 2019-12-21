@@ -114,12 +114,12 @@ Ext.define('Ext.ux.desktop.Desktop', {
             me.setWallpaper(wallpaper, me.wallpaperStretch);
         }
 
-        Ext.on('resize', function(){
+      /*  Ext.on('resize', function(){
             viewWidth = Element.getViewportWidth(),viewHeight = Element.getViewportHeight();
             me.setWidth(viewWidth );
             me.setHeight(viewHeight  - Ext.get('ux-taskbar').getHeight());
         }, me, {buffer: 100});
-
+*/
 
     },
 
@@ -316,7 +316,7 @@ Ext.define('Ext.ux.desktop.Desktop', {
                 constrainHeader: true,
                 minimizable: true,
                 maximizable: true,
-                floating: true
+                manager: me.windowGroups
             });
 
         cls = cls || Ext.window.Window;
@@ -369,20 +369,16 @@ Ext.define('Ext.ux.desktop.Desktop', {
                     console.log('[afterrender] each zstack: ', comp.getId());
                 });
                 
-                Ext.WindowManager.unregister(win);
+                //Ext.WindowManager.unregister(win);
+
                 console.log('me.windowGroups unregister:', win);
 
                 Ext.WindowManager.eachTopDown(function (comp) {
                     console.log('[afterrender] each zstack: ', comp.getId());
                 });
 
-                me.windowGroups.register(win);
+                //me.windowGroups.register(win);
 
-            },
-            'render':function(){
-                Ext.WindowManager.eachTopDown(function (comp) {
-                    console.log('[rende] reach zstack: ', comp.getId());
-                });
             }
         })
        

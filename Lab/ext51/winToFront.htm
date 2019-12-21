@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+
+    <!--ExtJs框架开始-->
+    <link rel="stylesheet" type="text/css" href="/Ext5/theme/neptune/ext-theme-neptune-all-debug.css" />
+    <link rel="stylesheet" type="text/css" href="/Ext5/css/ClearButton.css" />
+    <script type="text/javascript" src="/Ext5/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ux/ClearButton.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-theme-neptune-debug.js"></script>
+    <script type="text/javascript" src="/Ext5/ext-locale-zh_CN-debug.js"></script>
+
+   <style type="text/css">
+   </style>
+        <!--
+        <header>
+            <div style="border-style: dashed; border-color: #0000ff; width: 660px; height:60px; align-content: center;">
+             实验：显示grid的横向滚动条
+             </div>
+         </br></br>
+        </header>
+        -->
+    <script type="text/javascript">
+        Ext.onReady(function(){
+
+            var w1 = Ext.create('Ext.window.Window', {
+                id: 'w1',
+                title: 'Hello Win 1',
+                x: 10,
+                y: 10,
+                fixed:true,
+                height: 500,
+                width: 500,     //window的宽度
+                closeAction: 'destory',
+                scrollable: true, //这里设置true时， 且当grid的宽度比window的宽度宽时，就会显示横向滚动条
+                layout: 'fit',
+                modal : false,
+                constrain:true,
+                constrainHeader:true,
+                fbar : ['->',	
+                    {
+                    windowId : "demo01_button_2",
+                    controltype:"button",
+                    xtype : "button",
+                    text : "关闭",
+                    cls:"p2-button",
+                    //hidden : true,
+                    //id : "demo01_demo01_button_2",
+                    disabled : false,
+                    handler : function(src) {
+                        Ext.Msg.alert('Event Handler', '关闭');  // now alerts 42
+                    },
+                    tooltip : "关闭"
+                    },	
+                    {
+                    windowId : "demo01_button_3",
+                    controltype:"button",
+                    xtype : "button",
+                    text : "确定",
+                    cls:"p2-button",
+                    //hidden : true,
+                    //id : "demo01_demo01_button_3",
+                    disabled : false,
+                    handler : function(src) {
+                        Ext.Msg.alert('Event Handler', '确定');                         
+                    },
+                    tooltip : "确定"
+                    }
+                ],
+                listeners: {
+                    'activate': function(){
+                        console.log(this.getId(),' is active');
+                    }
+                }
+                
+            });
+
+            var w2 = Ext.create('Ext.window.Window', {
+                id: 'w2',
+                title: 'Hello Win 2',
+                x: 100,
+                y: 100,
+                fixed:true,
+                height: 500,
+                width: 500,     //window的宽度
+                closeAction: 'destory',
+                scrollable: true, //这里设置true时， 且当grid的宽度比window的宽度宽时，就会显示横向滚动条
+                layout: 'fit',
+                modal : false,
+                constrain:true,
+                constrainHeader:true,
+                fbar : ['->',	
+                    {
+                    windowId : "demo01_button_2",
+                    controltype:"button",
+                    xtype : "button",
+                    text : "关闭",
+                    cls:"p2-button",
+                    //hidden : true,
+                    //id : "demo01_demo01_button_2",
+                    disabled : false,
+                    handler : function(src) {
+                        Ext.Msg.alert('Event Handler', '关闭');  // now alerts 42
+                    },
+                    tooltip : "关闭"
+                    },	
+                    {
+                    windowId : "demo01_button_3",
+                    controltype:"button",
+                    xtype : "button",
+                    text : "确定",
+                    cls:"p2-button",
+                    //hidden : true,
+                    //id : "demo01_demo01_button_3",
+                    disabled : false,
+                    handler : function(src) {
+                        Ext.Msg.alert('Event Handler', '确定');                         
+                    },
+                    tooltip : "确定"
+                    }
+                ],
+                listeners: {
+                    'activate': function(){
+                        console.log(this.getId(),' is active');
+                    }
+                }
+            });
+
+   
+             new Ext.container.Viewport({
+                //autoScroll : true,
+                //scrollable: true,
+                id: 'vp',
+                listeners: {
+                    'afterrender': function(){
+                        w1.show();
+                        w2.show();
+                    }
+                }
+            });
+
+
+         });
+
+         
+
+       
+    </script>
+
+</head>
+<body>
+    '&#160;'
+</body>
+</html>

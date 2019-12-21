@@ -414,6 +414,43 @@
                                             console.log({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DEMO01'});}
                                     }
                                 }
+                            },
+                            {text : '示例 03',icon : 'http://localhost:8080/samex/webclient/images/',
+                                disabled:false,
+                                handler:function(){
+                                                if(Ext.get('win_DEMO_03')){
+                                                    return;
+                                                }
+                                                var win = P2Desktop.getDesktop().createWindow({
+                                                    id:'win_DEMO_03',
+                                                    appid:'myportal',
+                                                    windowId:'demo_03',
+                                                    title : 'App:demo_03',
+                                                    width : 1000,
+                                                    height : 600,
+                                                    // 最小宽度
+                                                    //minWidth : 500,
+                                                    x:0,
+                                                    y:0,
+                                                    maximized : true,
+                                                    layout : 'fit',
+                                                    flex: 1,
+                                                    listeners:{
+                                                    }
+                                                });
+                                                win.show();
+                                            
+                                },
+                                menuExpandDelay:1000,
+                                arrowCls:'x-menu-item-arrow x-menu-item-arrow-default p2-menu-item-item-arrow',
+                                menu :{
+                                    items:{
+                                        text:Global.startCreateShortcut,
+                                        iconCls:'addshortcut_icon',
+                                        handler:function(){
+                                            console.log({event:'addshortcut',targetid:'myportal',appid:'myportal',value:'DEMO01'});}
+                                    }
+                                }
                             }]
 						},
 						listeners : {
