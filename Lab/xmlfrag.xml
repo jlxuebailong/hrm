@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p2uiupgrades appid="library">
+    <!-- must to get before all operation. -->
+    <get value="id_1">
+ 	</get>
+
+    <!-- getroot -->
+    <getroot>
+
+    </getroot>
+
+
+    <get value="id_1">
+        <!-- add attribute -->
+        <add type="attribute" name="color" vlaue="blue"></add>
+        <!-- add element -->
+        <add type="element" name="textbox">
+			<add type="attribute" name="id" value="apptool_td_sec1_14" />
+			<add type="attribute" name="datafield" value="helptips" />
+		</add>
+
+    </get>
+
+
+    <!-- update -->
+    <get value="id_1">
+        <!-- update type only to be attribute, not be element; other will be warning. -->
+        <update type="attribute" name="att_1" value="val_1"/>
+ 	</get>
+
+    <!-- remove -->
+	<get value="library_designer_library_location_hirarchytree_1">
+        <remove type="attribute" name="hirarchytree_1"></remove>
+		
+ 	</get>
+
+    <get value="library_designer_library_location_hirarchytree_1">
+        <remove type="element"></remove>
+    </get>
+</p2uiupgrades>
